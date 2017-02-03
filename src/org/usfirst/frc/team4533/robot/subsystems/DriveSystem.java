@@ -5,6 +5,7 @@ import org.usfirst.frc.team4533.robot.RobotMap;
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.TalonControlMode;
 
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
@@ -17,18 +18,25 @@ public class DriveSystem extends Subsystem {
 	CANTalon leftMaster; 
 	CANTalon leftSlave;
 	CANTalon rightSlave;
+	SerialPort sPort = new SerialPort(9600, SerialPort.Port.kUSB);
+	byte syncByte = 0x5E;
+	byte endSec = 0x7E;
+	String name = null;
+	String unit = null;
+	String value = null;
 	
-	/*Note on Master/Slave Drivestyle-
-	 * This works by initiating all four motors (right master & slave, left master & slave), 
-	 * then setting the two slave motors to follow input from their masters
+	/*
 	 * 
+	 * Note on all this master/slave mumbo jumbo-
+	 * This works by initiating all four motors (right master & slave, left master & slave), 
+	 * then setting the two slave motors to follow input from their masters. 
+	 * The lingo is a little weird but basically, it just makes the slaves do everything the master does. 
 	 */
 	private DriveSystem(){
 		//this sets the right master motor channel 
 		rightMaster = new CANTalon(RobotMap.RIGHT_MASTER_MOTOR);
 		//this sets the left master motor channel
 		leftMaster = new CANTalon(RobotMap.LEFT_MASTER_MOTOR);
-		
 		//sets the right slave motor channel 
 		rightSlave = new CANTalon(RobotMap.RIGHT_SLAVE_MOTOR);
 		//changes the control mode to follower of the master motor
@@ -44,6 +52,8 @@ public class DriveSystem extends Subsystem {
 	}
 	
 	
+	
+	
 	public void drive(double left, double right){
 		this.leftMaster.set(left);
 		this.rightMaster.set(right);
@@ -51,6 +61,7 @@ public class DriveSystem extends Subsystem {
 		this.rightSlave.set(RobotMap.RIGHT_MASTER_MOTOR);
 	}
 
+	
 	public static void initialize(){
 		
 		if(INSTANCE == null){
