@@ -19,5 +19,4 @@ public class RobotMap {
 	public static final int Motor_Right_Master = 5;
 	public static final int Motor_Left_Slave = 2;
 	public static final int Motor_Right_Slave = 4;
-	
 }

@@ -8,6 +8,7 @@ import com.ctre.CANTalon;
 import com.ctre.CANTalon.TalonControlMode;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -18,25 +19,36 @@ public class DriveSystem extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	private static DriveSystem INSTANCE;
+
+	CANTalon rightMaster;
+	CANTalon leftMaster; 
+	CANTalon leftSlave;
+	CANTalon rightSlave;
 	
-	private CANTalon leftMaster;
-	private CANTalon rightMaster;
-	private CANTalon leftSlave;
-	private CANTalon rightSlave;
-	
-	private static final double DEFAULT_SPEED_ADJUSTMENT = 1;
-	
-	private DriveSystem() {
-		leftMaster = new CANTalon(RobotMap.Motor_Left_Master);
+	/*
+	 * 
+	 * Note on all this master/slave mumbo jumbo-
+	 * This works by initiating all four motors (right master & slave, left master & slave), 
+	 * then setting the two slave motors to follow input from their masters. 
+	 * The lingo is a little weird but basically, it just makes the slaves do everything the master does. 
+	 */
+	private DriveSystem(){
+		//this sets the right master motor channel 
 		rightMaster = new CANTalon(RobotMap.Motor_Right_Master);
-		
-		leftSlave = new CANTalon(RobotMap.Motor_Left_Slave);
-		leftSlave.changeControlMode(TalonControlMode.Follower);
-		leftSlave.set(RobotMap.Motor_Left_Master);
-		
+		//this sets the left master motor channel
+		leftMaster = new CANTalon(RobotMap.Motor_Left_Master);
+		//sets the right slave motor channel 
 		rightSlave = new CANTalon(RobotMap.Motor_Right_Slave);
+		//changes the control mode to follower of the master motor
 		rightSlave.changeControlMode(TalonControlMode.Follower);
+		//sets the master motor to the right master
 		rightSlave.set(RobotMap.Motor_Right_Master);
+		//sets the left slave motor channel
+		leftSlave = new CANTalon(RobotMap.Motor_Left_Slave);
+		//changes the control mode to be a follower of the master motor 
+		leftSlave.changeControlMode(TalonControlMode.Follower);
+    //sets the master motor to the left master
+		leftSlave.set(RobotMap.Motor_Left_Master);
 	}
 	
 	public static void initialize() {

@@ -2,7 +2,6 @@
 package org.usfirst.frc.team4533.robot;
 
 import org.usfirst.frc.team4533.robot.autonomous.FirstAutonomous;
-import org.usfirst.frc.team4533.robot.subsystems.DriveSystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -10,6 +9,10 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team4533.robot.commands.ExampleCommand;
+import org.usfirst.frc.team4533.robot.subsystems.DriveSystem;
+import org.usfirst.frc.team4533.robot.subsystems.GearSystem;
+import org.usfirst.frc.team4533.robot.utils.*;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -54,7 +57,6 @@ public class Robot extends IterativeRobot {
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 	}
-
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select between different autonomous modes
 	 * using the dashboard. The sendable chooser code works with the Java SmartDashboard. If you prefer the LabVIEW
