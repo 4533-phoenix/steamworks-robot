@@ -4,16 +4,21 @@ import org.usfirst.frc.team4533.robot.subsystems.ShooterSystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ShootCommand extends Command{
-	ShooterSystem shooter;
+public class ShootCommand extends Command {
+	public ShootCommand() {
+		this.shooter = ShooterSystem.getInstance();
+	}
+	
+	private ShooterSystem shooter;
+	
 	@Override
 	public void execute(){
-	//	shooter.shoot();
+		this.shooter.shoot();
 	}
 	
 	@Override
-	public void end(){
-		shooter.stopShoot();
+	public void end() {
+		this.shooter.stopShoot();
 	}
 	
 	@Override

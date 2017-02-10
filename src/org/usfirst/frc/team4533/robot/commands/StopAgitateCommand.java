@@ -7,14 +7,18 @@ import edu.wpi.first.wpilibj.command.Command;
 public class StopAgitateCommand extends Command{
 	private ShooterSystem shooter;
 	
+	public StopAgitateCommand() {
+		this.shooter = ShooterSystem.getInstance();
+	}
+	
 	@Override
 	public void execute(){
-		shooter.stopAgitate();
+		this.shooter.stopAgitate();
 	}
 	
 	@Override
 	public void end(){
-		shooter.agitate();
+		this.shooter.agitate();
 	}
 	
 	@Override

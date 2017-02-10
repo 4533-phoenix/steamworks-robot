@@ -3,34 +3,45 @@ package org.usfirst.frc.team4533.robot.subsystems;
 import org.usfirst.frc.team4533.robot.RobotMap;
 
 import com.ctre.CANTalon;
-
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class ShooterSystem extends Subsystem{
+public class ShooterSystem extends Subsystem {
 	
+	private static ShooterSystem INSTANCE;
 	CANTalon flyWheel;
-	CANTalon agitator;
-	private ShooterSystem(){
+	Spark agitator;
+	private ShooterSystem() {
 		//flyWheel = new CANTalon(RobotMap.FLY_WHEEL_MOTOR);
-		agitator = new CANTalon(RobotMap.AGITATOR_MOTOR);
+		agitator = new Spark(RobotMap.AGITATOR_MOTOR);
+		flyWheel = new CANTalon(RobotMap.FLY_WHEEL_MOTOR);
 	}
 	
-	public void agitate(){
+	public static void initialize() {
+		if (INSTANCE == null) {
+			INSTANCE = new ShooterSystem();
+		}
+	}
+	
+	public static ShooterSystem getInstance() {
+		return INSTANCE;
+	}
+	
+	public void agitate() {
 		agitator.set(RobotMap.AGITATOR_VOLTAGE);
 	}
-//	public void shoot(){
-	//	flyWheel.set(RobotMap.FLY_VOLTAGE);
-//	}
+	public void shoot() {
+		flyWheel.set(RobotMap.FLY_VOLTAGE);
+	}
 	
-	public void stopAgitate(){
+	public void stopAgitate() {
 		agitator.set(0);
 	}
 	
-	public void stopShoot(){
+	public void stopShoot() {
 		flyWheel.set(0);
 	}
 	
-	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
 		

@@ -4,6 +4,7 @@ package org.usfirst.frc.team4533.robot;
 import org.usfirst.frc.team4533.robot.autonomous.AutonomousRev2;
 import org.usfirst.frc.team4533.robot.subsystems.ClimbSystem;
 import org.usfirst.frc.team4533.robot.subsystems.DriveSystem;
+import org.usfirst.frc.team4533.robot.subsystems.ShooterSystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -32,6 +33,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	DriveSystem.initialize();
     	ClimbSystem.initialize();
+    	ShooterSystem.initialize();
     	OI.initialize();
         autoChooser = new SendableChooser<AutonomousRev2>();
         try {

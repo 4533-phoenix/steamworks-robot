@@ -4,15 +4,21 @@ import org.usfirst.frc.team4533.robot.subsystems.ShooterSystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class AgitateCommand extends Command{
+public class AgitateCommand extends Command {
+	public AgitateCommand() {
+		this.shooter = ShooterSystem.getInstance();
+	}
+	
 	private ShooterSystem shooter;
 	@Override
-	public void execute(){
-		shooter.agitate();
+	
+	public void execute() {
+		this.shooter.agitate();
 	}
+	
 	@Override
-	public void end(){
-		shooter.stopAgitate();
+	public void end() {
+		this.shooter.stopAgitate();
 	}
 	
 	@Override

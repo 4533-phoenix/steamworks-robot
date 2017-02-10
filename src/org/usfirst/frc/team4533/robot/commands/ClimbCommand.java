@@ -1,25 +1,27 @@
 package org.usfirst.frc.team4533.robot.commands;
 
 import org.usfirst.frc.team4533.robot.subsystems.ClimbSystem;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ClimbCommand extends Command{
+
+	public ClimbCommand() {
+		this.climber = ClimbSystem.getInstance();
+	}
+	
 	private ClimbSystem climber;
 	@Override
 	protected void execute() {
 		this.climber.climb();
 	}
-
-	public ClimbCommand() {
-		this.climber = ClimbSystem.getInstance();
-	}
+	
 	@Override
-	protected void end(){
+	protected void end() {
 		this.climber.brake();
 	}
+	
 	@Override
-	protected boolean isFinished(){
+	protected boolean isFinished() {
 		return false;
 	}
 	

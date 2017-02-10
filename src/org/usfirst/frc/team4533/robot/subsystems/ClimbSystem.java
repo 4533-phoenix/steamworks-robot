@@ -18,7 +18,7 @@ public class ClimbSystem extends Subsystem {
 	
 	CANTalon climbMotor;
 	
-	private ClimbSystem(){
+	private ClimbSystem() {
 		climbMotor = new CANTalon(RobotMap.CLIMB_MOTOR);
 	}
 	
@@ -35,8 +35,8 @@ public class ClimbSystem extends Subsystem {
 	public void climb() {
 		climbMotor.set(RobotMap.CLIMB_SPEED);
 	}
-	public void brake(){
-		climbMotor.set(RobotMap.CLIMB_SPEED);
+	public void brake() {
+		climbMotor.set(0);
 	}
 	
 	    public void initDefaultCommand() {
