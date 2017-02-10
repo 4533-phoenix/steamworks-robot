@@ -1,20 +1,21 @@
 package org.usfirst.frc.team4533.robot.commands;
 
 import org.usfirst.frc.team4533.robot.subsystems.DriveSystem;
+import org.usfirst.frc.team4533.robot.utils.NoSignalException;
+import org.usfirst.frc.team4533.robot.utils.SensorData;
+import org.usfirst.frc.team4533.robot.utils.SensorUtilities;
 
-import edu.wpi.first.wpilibj.command.TimedCommand;
-
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class AutoLeft extends TimedCommand {
+public class AutoLeft extends Command {
 
 	private DriveSystem drive;
 	private static double DEFAULT_DRIVE_SPEED;
 
-	public AutoLeft(int duration, double speed) {
-		super(duration);
+	public AutoLeft(double speed) {
 		this.drive = DriveSystem.getInstance();
 		this.requires(this.drive);
 		DEFAULT_DRIVE_SPEED = speed;
@@ -32,5 +33,20 @@ public class AutoLeft extends TimedCommand {
 
 	@Override
 	protected void interrupted() {
+	}
+
+	@Override
+	protected boolean isFinished() {
+		SensorData data = null;
+		try {
+			data = SensorUtilities.interpretSerial();
+		} catch (NoSignalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (data.getName() == "PIXY" && data.getUnit() == "direction") {
+			return data.getValue().equals("left");
+		}
+		return false;
 	}
 }

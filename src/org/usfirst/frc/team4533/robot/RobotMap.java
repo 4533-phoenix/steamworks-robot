@@ -19,4 +19,17 @@ public class RobotMap {
 	public static final int Motor_Right_Master = 5;
 	public static final int Motor_Left_Slave = 2;
 	public static final int Motor_Right_Slave = 4;
+	public static final int JOYSTICK_PORT = 0;
+	public static final int LIDAR_DISTANCE_IN = 20;
+	public static final double DEFAULT_SPEED = .5;
+	public static final int CLIMB_MOTOR = 6;
+	public static final double CLIMB_SPEED = 1;
+	public static final int JOYSTICK_CLIMB_BUTTON = 2;
+//	public static final int FLY_WHEEL_MOTOR = //CANTALON; //was 7 but we dont have a 7
+	public static final int AGITATOR_MOTOR = 8;
+	public static final double FLY_VOLTAGE = 1;
+	public static final double AGITATOR_VOLTAGE = .5;
+	public static final int JOYSTICK_AGITATE_BUTTON = 8;
+	public static final int JOYSTICK_FLY_WHEEL_BUTTON = 4;
+	//public static final int INTAKE_MOTOR = //A Spark;
 }

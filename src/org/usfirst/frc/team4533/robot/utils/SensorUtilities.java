@@ -6,18 +6,23 @@ public class SensorUtilities {
 	private static final byte syncByte = 94;
 	private static final byte endSec = 126;
 	
-	
-	public static SensorData interpretSerial(){
-		SerialPort sPort = new SerialPort(9600, SerialPort.Port.kUSB);
+
+	public static SensorData interpretSerial() throws NoSignalException{
+		SerialPort sPort = new SerialPort(74880, SerialPort.Port.kUSB);
 		SensorData data = new SensorData();
 		String name = "";
 		String unit = "";
 		String value = "";
 		int i = 0;
 		//find syncbyte (caret)
-		byte curr = sPort.read(1)[0];
+		byte curr = 0x00;
+		
 		while(curr != syncByte) {
-			curr = sPort.read(1)[0];
+			try{
+				curr = sPort.read(1)[0];
+			} catch(Exception e){
+				throw new NoSignalException();
+			}
 		}
 		//find the name from the serial 
 		curr = sPort.read(1)[0];

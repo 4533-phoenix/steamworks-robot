@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4533.robot.commands;
 
+import org.usfirst.frc.team4533.robot.RobotMap;
 import org.usfirst.frc.team4533.robot.subsystems.DriveSystem;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -12,7 +13,7 @@ public class DriveWithJoystick extends Command {
 	
 	public DriveWithJoystick() {
 		this.drive = DriveSystem.getInstance();
-		driver = new Joystick(0);
+		driver = new Joystick(RobotMap.JOYSTICK_PORT);
 		this.requires(drive);
 	}
 	

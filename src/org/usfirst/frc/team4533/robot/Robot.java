@@ -1,7 +1,9 @@
 
 package org.usfirst.frc.team4533.robot;
 
-import org.usfirst.frc.team4533.robot.autonomous.FirstAutonomous;
+import org.usfirst.frc.team4533.robot.autonomous.AutonomousRev2;
+import org.usfirst.frc.team4533.robot.subsystems.ClimbSystem;
+import org.usfirst.frc.team4533.robot.subsystems.DriveSystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -9,10 +11,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team4533.robot.commands.ExampleCommand;
-import org.usfirst.frc.team4533.robot.subsystems.DriveSystem;
-import org.usfirst.frc.team4533.robot.subsystems.GearSystem;
-import org.usfirst.frc.team4533.robot.utils.*;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -25,7 +23,7 @@ public class Robot extends IterativeRobot {
 	//public static OI oi;
  
     private CommandGroup autonomousCommand;
-    private SendableChooser autoChooser;
+    private SendableChooser<AutonomousRev2> autoChooser;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -33,10 +31,11 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	DriveSystem.initialize();
-    	//oi = new OI();
-        autoChooser = new SendableChooser();
+    	ClimbSystem.initialize();
+    	OI.initialize();
+        autoChooser = new SendableChooser<AutonomousRev2>();
         try {
-			autoChooser.addDefault("FirstAutonomous", new FirstAutonomous());
+			autoChooser.addDefault("FirstAutonomous", new AutonomousRev2());
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

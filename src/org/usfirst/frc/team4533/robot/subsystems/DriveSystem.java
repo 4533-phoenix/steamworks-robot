@@ -8,7 +8,6 @@ import com.ctre.CANTalon;
 import com.ctre.CANTalon.TalonControlMode;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -62,14 +61,14 @@ public class DriveSystem extends Subsystem {
 	}
 	
 	public void drive(double left, double right) {
-		this.leftMaster.set(left*DEFAULT_SPEED_ADJUSTMENT);
+		this.leftMaster.set(left);
 		this.leftSlave.set(RobotMap.Motor_Left_Master);
-		this.rightMaster.set(-right*DEFAULT_SPEED_ADJUSTMENT);
+		this.rightMaster.set(-right);
 		this.rightSlave.set(RobotMap.Motor_Right_Master);
 	}
 	
 	public void DriveWithJoystick(Joystick driver) {
-		this.drive(driver.getY(), driver.getRawAxis(5));
+		this.drive(-driver.getY(), -driver.getRawAxis(3));
 	}
 	
 	public void forward(double value) {
