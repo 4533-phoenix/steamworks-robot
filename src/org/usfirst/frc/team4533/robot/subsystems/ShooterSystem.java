@@ -3,17 +3,18 @@ package org.usfirst.frc.team4533.robot.subsystems;
 import org.usfirst.frc.team4533.robot.RobotMap;
 
 import com.ctre.CANTalon;
-import edu.wpi.first.wpilibj.Spark;
+
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class ShooterSystem extends Subsystem {
 	
 	private static ShooterSystem INSTANCE;
 	CANTalon flyWheel;
-	Spark agitator;
+	Relay agitator;
 	private ShooterSystem() {
 		//flyWheel = new CANTalon(RobotMap.FLY_WHEEL_MOTOR);
-		agitator = new Spark(RobotMap.AGITATOR_MOTOR);
+		agitator = new Relay(RobotMap.AGITATOR_MOTOR);
 		flyWheel = new CANTalon(RobotMap.FLY_WHEEL_MOTOR);
 	}
 	
@@ -28,17 +29,17 @@ public class ShooterSystem extends Subsystem {
 	}
 	
 	public void agitate() {
-		agitator.set(RobotMap.AGITATOR_VOLTAGE);
+		agitator.set(Relay.Value.kOn);
 	}
-	public void shoot() {
+	public void startFlywheel() {
 		flyWheel.set(RobotMap.FLY_VOLTAGE);
 	}
 	
 	public void stopAgitate() {
-		agitator.set(0);
+		agitator.set(Relay.Value.kOff);
 	}
 	
-	public void stopShoot() {
+	public void stopFlywheel() {
 		flyWheel.set(0);
 	}
 	

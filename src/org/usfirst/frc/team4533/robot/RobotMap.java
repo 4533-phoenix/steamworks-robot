@@ -15,21 +15,29 @@ public class RobotMap {
     // number and the module. For example you with a rangefinder:
     // public static int rangefinderPort = 1;
     // public static int rangefinderModule = 1;
+	//can
 	public static final int Motor_Left_Master = 1;
-	public static final int Motor_Right_Master = 5;
+	public static final int Motor_Right_Master = 4;
 	public static final int Motor_Left_Slave = 2;
-	public static final int Motor_Right_Slave = 4;
+	public static final int Motor_Right_Slave = 3;
+	public static final int FLY_WHEEL_MOTOR = 5;
+	//random stuff
 	public static final int JOYSTICK_PORT = 0;
 	public static final int LIDAR_DISTANCE_IN = 20;
 	public static final double DEFAULT_SPEED = .5;
-	public static final int CLIMB_MOTOR = 6;
 	public static final double CLIMB_SPEED = 1;
 	public static final int JOYSTICK_CLIMB_BUTTON = 2;
-	public static final int FLY_WHEEL_MOTOR = 3;
-	public static final int AGITATOR_MOTOR = 7;
 	public static final double FLY_VOLTAGE = 1;
 	public static final double AGITATOR_VOLTAGE = 1;
 	public static final int JOYSTICK_AGITATE_BUTTON = 6;
 	public static final int JOYSTICK_FLY_WHEEL_BUTTON = 4;
-	//public static final int INTAKE_MOTOR = //A Spark;
+	
+	//pwm
+	public static final int CLIMB_MOTOR = 0;
+
+	//relay
+	public static final int AGITATOR_MOTOR = 0;
+	
+
+
 }
