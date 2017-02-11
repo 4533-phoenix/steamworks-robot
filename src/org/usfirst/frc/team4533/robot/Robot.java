@@ -31,6 +31,10 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+    	String bot = "Practice";
+    	if (bot.equals("Practice")) {
+    		RobotMap.setPracticeBot();
+    	}
     	DriveSystem.initialize();
     	ClimbSystem.initialize();
     	ShooterSystem.initialize();

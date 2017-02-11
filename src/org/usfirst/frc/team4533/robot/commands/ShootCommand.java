@@ -13,12 +13,12 @@ public class ShootCommand extends Command {
 	
 	@Override
 	public void execute(){
-		this.shooter.shoot();
+		this.shooter.startFlywheel();
 	}
 	
 	@Override
 	public void end() {
-		this.shooter.stopShoot();
+		this.shooter.stopFlywheel();
 	}
 	
 	@Override
