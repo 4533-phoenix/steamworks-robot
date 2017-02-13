@@ -3,7 +3,8 @@ package org.usfirst.frc.team4533.robot.subsystems;
 
 import org.usfirst.frc.team4533.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.Spark;
+import com.ctre.CANTalon;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -14,11 +15,15 @@ public class ClimbSystem extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	private static ClimbSystem INSTANCE;
+
+
 	
-	Spark climbMotor;
+	
+	CANTalon climbMotor;
+	
 	
 	private ClimbSystem() {
-		climbMotor = new Spark(RobotMap.CLIMB_MOTOR);
+		climbMotor = new CANTalon(RobotMap.CLIMB_MOTOR);
 	}
 	
 	public static void initialize() {

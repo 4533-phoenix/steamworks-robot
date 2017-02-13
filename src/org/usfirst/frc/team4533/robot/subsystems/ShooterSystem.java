@@ -4,18 +4,17 @@ import org.usfirst.frc.team4533.robot.RobotMap;
 
 import com.ctre.CANTalon;
 
-import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class ShooterSystem extends Subsystem {
 	
 	private static ShooterSystem INSTANCE;
 	CANTalon flyWheel;
-	Relay agitator;
+	Spark door;
 	private ShooterSystem() {
-		//flyWheel = new CANTalon(RobotMap.FLY_WHEEL_MOTOR);
-		agitator = new Relay(RobotMap.AGITATOR_MOTOR);
 		flyWheel = new CANTalon(RobotMap.FLY_WHEEL_MOTOR);
+		door = new Spark(RobotMap.DOOR_MOTOR);
 	}
 	
 	public static void initialize() {
@@ -27,16 +26,17 @@ public class ShooterSystem extends Subsystem {
 	public static ShooterSystem getInstance() {
 		return INSTANCE;
 	}
-	
-	public void agitate() {
-		agitator.set(Relay.Value.kOn);
-	}
+
 	public void startFlywheel() {
 		flyWheel.set(RobotMap.FLY_VOLTAGE);
 	}
 	
-	public void stopAgitate() {
-		agitator.set(Relay.Value.kOff);
+	public void openDoor() {
+		door.set(RobotMap.DOOR);
+	}
+	
+	public void closeDoor() {
+		door.set(-RobotMap.DOOR);
 	}
 	
 	public void stopFlywheel() {
