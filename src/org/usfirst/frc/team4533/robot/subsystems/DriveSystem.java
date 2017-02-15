@@ -7,6 +7,7 @@ import org.usfirst.frc.team4533.robot.commands.DriveWithJoystick;
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.TalonControlMode;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -24,7 +25,8 @@ public class DriveSystem extends Subsystem {
 	CANTalon leftMaster;
 	CANTalon leftSlave;
 	CANTalon rightSlave;
-	DigitalInput di;
+	static DigitalInput di;
+	static AnalogInput ultraSonic;
 
 	/*
 	 * 
@@ -51,7 +53,7 @@ public class DriveSystem extends Subsystem {
 		leftSlave.changeControlMode(TalonControlMode.Follower);
 		// sets the master motor to the left master
 		leftSlave.set(RobotMap.Motor_Left_Master);
-		
+		ultraSonic = new AnalogInput(RobotMap.FRONTDISTANCE);
 		di = new DigitalInput(RobotMap.GEAR_SENSOR);
 	}
 
@@ -128,8 +130,11 @@ public class DriveSystem extends Subsystem {
 	public void turnRight() {
 		this.turnRight(.5, -.5);
 	}
-	
-	public boolean hasGear(){
+	public static double ultraSonic() {
+		return (ultraSonic.getValue() / 8);
+		
+	}
+	public static boolean hasGear(){
 		if(di.get()){
 			return true;
 		}else{

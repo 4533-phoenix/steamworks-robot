@@ -13,7 +13,7 @@ public class OI {
 	private OI() {
 		//while held, the climb button makes the robot climb, and then sets the voltage to 0 when the button is released
 		climbBtn.whileHeld(new ClimbCommand());
-		//climbBtn.whenReleased(new BrakeCommand());
+		climbBtn.whenReleased(new BrakeCommand());
 		flyBtn.toggleWhenPressed(new ShootCommand());
 		doorBtn.whileHeld(new DoorOpen());
 	}

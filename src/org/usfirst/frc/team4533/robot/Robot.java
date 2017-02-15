@@ -2,6 +2,7 @@
 package org.usfirst.frc.team4533.robot;
 
 import org.usfirst.frc.team4533.robot.autonomous.AutonomousRev2;
+
 import org.usfirst.frc.team4533.robot.subsystems.ClimbSystem;
 import org.usfirst.frc.team4533.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team4533.robot.subsystems.ShooterSystem;
@@ -35,6 +36,7 @@ public class Robot extends IterativeRobot {
     	if (bot.equals("Practice")) {
     		RobotMap.setPracticeBot();
     	}
+    	ClimbSystem.MotorSwitch();
     	DriveSystem.initialize();
     	ClimbSystem.initialize();
     	ShooterSystem.initialize();
@@ -97,6 +99,11 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        SmartDashboard.putBoolean("Gear", DriveSystem.hasGear());
+        SmartDashboard.putBoolean("Climber On?", ClimbSystem.isOn());
+        SmartDashboard.putNumber("Front Distance", DriveSystem.ultraSonic());
+        String messageOfTheDay = "Ben And Shane Are Awesome";
+		SmartDashboard.putString("Message Of The Day", messageOfTheDay );
     }
     
     /**

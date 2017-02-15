@@ -10,6 +10,7 @@ public class ClimbCommand extends Command{
 	}
 	
 	private ClimbSystem climber;
+	
 	@Override
 	protected void execute() {
 		this.climber.climb();

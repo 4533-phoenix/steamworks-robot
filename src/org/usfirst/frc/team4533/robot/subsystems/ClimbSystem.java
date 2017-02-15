@@ -5,25 +5,32 @@ import org.usfirst.frc.team4533.robot.RobotMap;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- *
- */
+
 public class ClimbSystem extends Subsystem {
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	private static ClimbSystem INSTANCE;
-
-
-	
-	
 	CANTalon climbMotor;
+	public static boolean isClimb;
 	
+	public static void MotorSwitch() {
+		if(RobotMap.isPractice()) {
+			CANTalon climbMotor;
+		}else {
+			Spark climbMotor;
+		}
 	
+	}
 	private ClimbSystem() {
-		climbMotor = new CANTalon(RobotMap.CLIMB_MOTOR);
+		if(RobotMap.isPractice()) {
+			climbMotor = new CANTalon(RobotMap.CLIMB_MOTOR);
+		}else {
+			//climbMotor = new Spark(RobotMap.CLIMB_MOTOR);
+		}
 	}
 	
 	public static void initialize() {
@@ -38,13 +45,18 @@ public class ClimbSystem extends Subsystem {
 	
 	public void climb() {
 		climbMotor.set(RobotMap.CLIMB_SPEED);
+		isClimb = true;
 	}
 	public void brake() {
 		climbMotor.set(0);
+		isClimb = false;
 	}
 	
-	public boolean ready() {
+	public static boolean ready() {
 		return false;
+	}
+	public static boolean isOn() {
+		return isClimb;
 	}
 	    public void initDefaultCommand() {
         // Set the default command for a subsystem here.
