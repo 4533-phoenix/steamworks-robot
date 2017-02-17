@@ -13,7 +13,7 @@ public class SensorUtilities {
 		String name = "";
 		String unit = "";
 		String value = "";
-		int i = 0;
+		
 		//find syncbyte (caret)
 		byte curr = 0x00;
 		

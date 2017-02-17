@@ -3,6 +3,9 @@ package org.usfirst.frc.team4533.robot.subsystems;
 
 import org.usfirst.frc.team4533.robot.RobotMap;
 import org.usfirst.frc.team4533.robot.commands.DriveWithJoystick;
+import org.usfirst.frc.team4533.robot.utils.NoSignalException;
+import org.usfirst.frc.team4533.robot.utils.SensorData;
+import org.usfirst.frc.team4533.robot.utils.SensorUtilities;
 
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.TalonControlMode;
@@ -27,6 +30,7 @@ public class DriveSystem extends Subsystem {
 	CANTalon rightSlave;
 	static DigitalInput di;
 	static AnalogInput ultraSonic;
+	
 
 	/*
 	 * 
@@ -140,6 +144,17 @@ public class DriveSystem extends Subsystem {
 		}else{
 			return false;
 		}
+	}
+	public static String toDashboard(){
+		try {
+			return SensorUtilities.interpretSerial().toString();
+		} catch (NoSignalException e) {
+			// TODO Auto-generated catch block
+			System.out.println("yoyoyoyo");
+			e.printStackTrace();
+		}
+		return null;
+		
 	}
 	
 	public void initDefaultCommand() {

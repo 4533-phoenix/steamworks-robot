@@ -6,6 +6,7 @@ import org.usfirst.frc.team4533.robot.autonomous.AutonomousRev2;
 import org.usfirst.frc.team4533.robot.subsystems.ClimbSystem;
 import org.usfirst.frc.team4533.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team4533.robot.subsystems.ShooterSystem;
+import org.usfirst.frc.team4533.robot.utils.NoSignalException;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -32,7 +33,7 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-    	String bot = "Practice";
+    	String bot = "NoWay";
     	if (bot.equals("Practice")) {
     		RobotMap.setPracticeBot();
     	}
@@ -102,7 +103,8 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putBoolean("Gear", DriveSystem.hasGear());
         SmartDashboard.putBoolean("Climber On?", ClimbSystem.isOn());
         SmartDashboard.putNumber("Front Distance", DriveSystem.ultraSonic());
-        String messageOfTheDay = "Ben And Shane Are Awesome";
+        String messageOfTheDay = DriveSystem.toDashboard();
+		messageOfTheDay = DriveSystem.toDashboard();
 		SmartDashboard.putString("Message Of The Day", messageOfTheDay );
     }
     
