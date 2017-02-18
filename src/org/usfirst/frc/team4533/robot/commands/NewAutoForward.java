@@ -2,7 +2,6 @@ package org.usfirst.frc.team4533.robot.commands;
 
 import org.usfirst.frc.team4533.robot.RobotMap;
 import org.usfirst.frc.team4533.robot.subsystems.DriveSystem;
-import org.usfirst.frc.team4533.robot.utils.NoSignalException;
 import org.usfirst.frc.team4533.robot.utils.SensorData;
 import org.usfirst.frc.team4533.robot.utils.SensorUtilities;
 
@@ -37,13 +36,8 @@ public class NewAutoForward extends Command {
 	@Override
 	protected boolean isFinished() {
 		boolean finished = false;
-		SensorData data = null;
-		try {
-			data = SensorUtilities.interpretSerial();
-		} catch (NoSignalException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		SensorData data = SensorUtilities.interpretSerial();
+
 		
 		if (data.getName() == "LIDAR" && data.getUnit() == "cm") {
 			int distance = Integer.parseInt(data.getValue());

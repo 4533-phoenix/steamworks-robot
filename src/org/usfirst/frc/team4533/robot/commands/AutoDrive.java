@@ -2,7 +2,6 @@ package org.usfirst.frc.team4533.robot.commands;
 
 import org.usfirst.frc.team4533.robot.RobotMap;
 import org.usfirst.frc.team4533.robot.subsystems.DriveSystem;
-import org.usfirst.frc.team4533.robot.utils.NoSignalException;
 import org.usfirst.frc.team4533.robot.utils.SensorData;
 import org.usfirst.frc.team4533.robot.utils.SensorUtilities;
 
@@ -37,7 +36,7 @@ public class AutoDrive extends Command {
 		
 		return (distance > 150);
 	}
-	public Command drive() throws NoSignalException{
+	public Command drive() {
 		double spd = RobotMap.DEFAULT_SPEED;
 		double turnSpeed = RobotMap.DEFAULT_SPEED / 2;
 		data = SensorUtilities.interpretSerial();

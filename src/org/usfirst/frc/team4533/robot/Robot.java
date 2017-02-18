@@ -1,12 +1,10 @@
 
 package org.usfirst.frc.team4533.robot;
 
-import org.usfirst.frc.team4533.robot.autonomous.AutonomousRev2;
-
 import org.usfirst.frc.team4533.robot.subsystems.ClimbSystem;
 import org.usfirst.frc.team4533.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team4533.robot.subsystems.ShooterSystem;
-import org.usfirst.frc.team4533.robot.utils.NoSignalException;
+
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -26,7 +24,6 @@ public class Robot extends IterativeRobot {
 	//public static OI oi;
  
     private CommandGroup autonomousCommand;
-    private SendableChooser<AutonomousRev2> autoChooser;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -37,19 +34,12 @@ public class Robot extends IterativeRobot {
     	if (bot.equals("Practice")) {
     		RobotMap.setPracticeBot();
     	}
-    	ClimbSystem.MotorSwitch();
+    	
     	DriveSystem.initialize();
     	ClimbSystem.initialize();
     	ShooterSystem.initialize();
     	OI.initialize();
-        autoChooser = new SendableChooser<AutonomousRev2>();
-        try {
-			autoChooser.addDefault("FirstAutonomous", new AutonomousRev2());
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        SmartDashboard.putData("Autonomous mode chooser", autoChooser);
+
     }
     	
 	
@@ -75,9 +65,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-      this.autonomousCommand =
-    		 (CommandGroup) autoChooser.getSelected();
-      this.autonomousCommand.start();
+
     }
 
     /**
@@ -103,9 +91,10 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putBoolean("Gear", DriveSystem.hasGear());
         SmartDashboard.putBoolean("Climber On?", ClimbSystem.isOn());
         SmartDashboard.putNumber("Front Distance", DriveSystem.ultraSonic());
-        String messageOfTheDay = DriveSystem.toDashboard();
-		messageOfTheDay = DriveSystem.toDashboard();
-		SmartDashboard.putString("Message Of The Day", messageOfTheDay );
+        String messageOfTheDay = "don't do school stay in drugs";
+		SmartDashboard.putString("Message Of The Day", messageOfTheDay);
+		SmartDashboard.putString("PIXY", DriveSystem.pixyValue());
+		SmartDashboard.putNumber("LIDAR", DriveSystem.lidarValue());
     }
     
     /**

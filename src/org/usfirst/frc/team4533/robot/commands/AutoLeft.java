@@ -1,7 +1,6 @@
 package org.usfirst.frc.team4533.robot.commands;
 
 import org.usfirst.frc.team4533.robot.subsystems.DriveSystem;
-import org.usfirst.frc.team4533.robot.utils.NoSignalException;
 import org.usfirst.frc.team4533.robot.utils.SensorData;
 import org.usfirst.frc.team4533.robot.utils.SensorUtilities;
 
@@ -37,13 +36,7 @@ public class AutoLeft extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		SensorData data = null;
-		try {
-			data = SensorUtilities.interpretSerial();
-		} catch (NoSignalException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		SensorData data = SensorUtilities.interpretSerial();
 		if (data.getName() == "PIXY" && data.getUnit() == "direction") {
 			return data.getValue().equals("left");
 		}

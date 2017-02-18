@@ -3,7 +3,6 @@ package org.usfirst.frc.team4533.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team4533.robot.Robot;
-import org.usfirst.frc.team4533.robot.utils.NoSignalException;
 import org.usfirst.frc.team4533.robot.utils.SensorUtilities;
 
 /**
@@ -24,12 +23,7 @@ public class ExampleCommand extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		try {
-			System.out.println(SensorUtilities.interpretSerial());
-		} catch (NoSignalException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		System.out.println(SensorUtilities.interpretSerial());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

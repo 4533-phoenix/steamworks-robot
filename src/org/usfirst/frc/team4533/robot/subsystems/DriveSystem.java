@@ -3,7 +3,7 @@ package org.usfirst.frc.team4533.robot.subsystems;
 
 import org.usfirst.frc.team4533.robot.RobotMap;
 import org.usfirst.frc.team4533.robot.commands.DriveWithJoystick;
-import org.usfirst.frc.team4533.robot.utils.NoSignalException;
+
 import org.usfirst.frc.team4533.robot.utils.SensorData;
 import org.usfirst.frc.team4533.robot.utils.SensorUtilities;
 
@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -30,7 +31,10 @@ public class DriveSystem extends Subsystem {
 	CANTalon rightSlave;
 	static DigitalInput di;
 	static AnalogInput ultraSonic;
-	
+	static SensorData data;
+	static String name;
+	static String value;
+	static String unit;
 
 	/*
 	 * 
@@ -85,7 +89,7 @@ public class DriveSystem extends Subsystem {
 		} else {
 			ro = 1;
 		}
-		this.drive(getControlSpeed(driver.getY(),5) * ro, getControlSpeed(driver.getRawAxis(3),5) * ro);
+		this.drive(getControlSpeed(driver.getY(), 5) * ro, getControlSpeed(driver.getRawAxis(3), 5) * ro);
 
 	}
 
@@ -134,29 +138,49 @@ public class DriveSystem extends Subsystem {
 	public void turnRight() {
 		this.turnRight(.5, -.5);
 	}
+
 	public static double ultraSonic() {
 		return (ultraSonic.getValue() / 8);
-		
+
 	}
-	public static boolean hasGear(){
-		if(di.get()){
+
+	public static boolean hasGear() {
+		if (di.get()) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
-	public static String toDashboard(){
-		try {
-			return SensorUtilities.interpretSerial().toString();
-		} catch (NoSignalException e) {
-			// TODO Auto-generated catch block
-			System.out.println("yoyoyoyo");
-			e.printStackTrace();
+
+
+	public static int lidarValue() {
+		data = SensorUtilities.interpretSerial();
+		if (data != null) {
+			name = data.getName();
+			if (name == "LIDAR") {
+				return Integer.parseInt(value);
+			} else {
+				return (int) SmartDashboard.getNumber("LIDAR", 0.0);
+			}
+		} else {
+			return -1;
 		}
-		return null;
-		
 	}
-	
+
+	public static String pixyValue() {
+		data = SensorUtilities.interpretSerial();
+		if (data == null) {
+			return "";
+		} else {
+			name = data.getName();
+			if (name == "PIXY") {
+				return value;
+			} else {
+				return SmartDashboard.getString("PIXY", "straight");
+			}
+		}
+	}
+
 	public void initDefaultCommand() {
 		this.setDefaultCommand(new DriveWithJoystick());
 		// Set the default command for a subsystem here.

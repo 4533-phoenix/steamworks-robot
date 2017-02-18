@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 	Joystick stick = new Joystick(RobotMap.JOYSTICK_PORT);
 	private static OI INSTANCE;
-	JoystickButton climbBtn = new JoystickButton(stick, RobotMap.B_BUTTON);
+	JoystickButton climbBtn = new JoystickButton(stick, RobotMap.A_BUTTON);
 	JoystickButton flyBtn = new JoystickButton(stick, RobotMap.RIGHT_BUMPER);
 	JoystickButton doorBtn = new JoystickButton(stick, RobotMap.RIGHT_TRIGGER);
 	private OI() {
