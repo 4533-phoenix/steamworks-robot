@@ -14,11 +14,11 @@ public class ClimbSystem extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	private static ClimbSystem INSTANCE;
-	Spark climbMotor;
+	CANTalon climbMotor;
 	public static boolean isClimb;
 	
-	private ClimbSystem() {
-		climbMotor = new Spark(RobotMap.CLIMB_MOTOR);
+	public ClimbSystem() {
+		climbMotor = new CANTalon(RobotMap.CLIMB_MOTOR);
 	}
 	
 	public static void initialize() {

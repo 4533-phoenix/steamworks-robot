@@ -4,13 +4,12 @@ package org.usfirst.frc.team4533.robot;
 import org.usfirst.frc.team4533.robot.subsystems.ClimbSystem;
 import org.usfirst.frc.team4533.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team4533.robot.subsystems.ShooterSystem;
-
+import org.usfirst.frc.team4533.robot.utils.SensorData;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -22,24 +21,26 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 	
 	//public static OI oi;
- 
+	public static DriveSystem drive;
+	public static ClimbSystem climb;
+	public static ShooterSystem shooter;
+	public static OI oi;
     private CommandGroup autonomousCommand;
-
+    public static double heading;
+    public static SensorData data;
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
-    	String bot = "NoWay";
+    	String bot = "Practice";
     	if (bot.equals("Practice")) {
     		RobotMap.setPracticeBot();
     	}
-    	
-    	DriveSystem.initialize();
-    	ClimbSystem.initialize();
-    	ShooterSystem.initialize();
-    	OI.initialize();
-
+    	drive = new DriveSystem();
+    	climb = new ClimbSystem();
+    	shooter = new ShooterSystem();
+    	oi = new OI();
     }
     	
 	
@@ -95,6 +96,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putString("Message Of The Day", messageOfTheDay);
 		SmartDashboard.putString("PIXY", DriveSystem.pixyValue());
 		SmartDashboard.putNumber("LIDAR", DriveSystem.lidarValue());
+		//arduino.update();
+		
     }
     
     /**

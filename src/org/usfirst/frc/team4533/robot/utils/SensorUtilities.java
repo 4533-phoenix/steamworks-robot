@@ -8,6 +8,11 @@ public class SensorUtilities {
 	
 
 	public static SensorData interpretSerial(){
+		return null;
+		/*
+		 * HERE BE DRAGONS
+		 * 
+		
 		SerialPort sPort = new SerialPort(115200, SerialPort.Port.kUSB);
 		SensorData data = new SensorData();
 		String name = "";
@@ -16,7 +21,7 @@ public class SensorUtilities {
 		
 		//find syncbyte (caret)
 		byte curr = 0x00;
-		try{
+		//try{
 		while(curr != syncByte) {
 			curr = sPort.read(1)[0];
 
@@ -49,6 +54,8 @@ public class SensorUtilities {
 		} catch (ArrayIndexOutOfBoundsException e){
 			return null;
 		}
+
+		*/
 	}
 	
 }

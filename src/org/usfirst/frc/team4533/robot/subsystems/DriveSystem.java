@@ -44,7 +44,7 @@ public class DriveSystem extends Subsystem {
 	 * little weird but basically, it just makes the slaves do everything the
 	 * master does.
 	 */
-	private DriveSystem() {
+	public DriveSystem() {
 		// this sets the right master motor channel
 		rightMaster = new CANTalon(RobotMap.Motor_Right_Master);
 		// this sets the left master motor channel

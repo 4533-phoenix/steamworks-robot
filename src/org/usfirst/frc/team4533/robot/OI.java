@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 	Joystick stick = new Joystick(RobotMap.JOYSTICK_PORT);
 	private static OI INSTANCE;
-	JoystickButton climbBtn = new JoystickButton(stick, RobotMap.A_BUTTON);
+	JoystickButton climbBtn = new JoystickButton(stick, RobotMap.B_BUTTON);
 	JoystickButton flyBtn = new JoystickButton(stick, RobotMap.RIGHT_BUMPER);
 	JoystickButton doorBtn = new JoystickButton(stick, RobotMap.RIGHT_TRIGGER);
-	private OI() {
+	OI() {
 		//while held, the climb button makes the robot climb, and then sets the voltage to 0 when the button is released
 		climbBtn.whileHeld(new ClimbCommand());
 		climbBtn.whenReleased(new BrakeCommand());

@@ -12,7 +12,7 @@ public class ShooterSystem extends Subsystem {
 	private static ShooterSystem INSTANCE;
 	CANTalon flyWheel;
 	Spark door;
-	private ShooterSystem() {
+	public ShooterSystem() {
 		flyWheel = new CANTalon(RobotMap.FLY_WHEEL_MOTOR);
 		door = new Spark(RobotMap.DOOR_MOTOR);
 	}
