@@ -11,6 +11,7 @@ public class OI {
 	JoystickButton flyBtn = new JoystickButton(stick, RobotMap.RIGHT_BUMPER);
 	JoystickButton doorBtn = new JoystickButton(stick, RobotMap.RIGHT_TRIGGER);
 	JoystickButton agitator = new JoystickButton(stick, RobotMap.LEFT_BUMPER);
+	JoystickButton testingButton = new JoystickButton(stick, RobotMap.A_BUTTON);
 	OI() {
 		//while held, the climb button makes the robot climb, and then sets the voltage to 0 when the button is released
 		climbBtn.whileHeld(new ClimbCommand());
@@ -18,6 +19,7 @@ public class OI {
 		flyBtn.toggleWhenPressed(new ShootCommand());
 		doorBtn.whileHeld(new DoorOpen());
 		agitator.toggleWhenPressed(new AgitatorCommand());
+		testingButton.whenPressed(new DriveWithDistanceReading(-1,24,0));
 	}
 	public static OI getInstance(){
 		return INSTANCE;
