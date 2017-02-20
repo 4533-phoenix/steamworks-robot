@@ -7,9 +7,11 @@ import org.usfirst.frc.team4533.robot.subsystems.ShooterSystem;
 import org.usfirst.frc.team4533.robot.utils.SensorData;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,6 +30,10 @@ public class Robot extends IterativeRobot {
     private CommandGroup autonomousCommand;
     public static double heading;
     public static SensorData data;
+    public SendableChooser seedChooser;
+    public static int seed;
+    public static int maxSpeed;
+    Preferences prefs;
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -41,6 +47,14 @@ public class Robot extends IterativeRobot {
     	climb = new ClimbSystem();
     	shooter = new ShooterSystem();
     	oi = new OI();
+    	seedChooser = new SendableChooser();
+    	//seedChooser.addDefault("5", );
+    	//seedChooser.addObject("1", this.DriveSystem.getControlSpeed(2,4));//seed=1
+    	//seedChooser.addObject("2", seed = 2);
+    	//seedChooser.addObject("8", seed = 8);
+    	prefs = Preferences.getInstance();
+    	seed = 5;
+    	maxSpeed = 100;
     }
     	
 	

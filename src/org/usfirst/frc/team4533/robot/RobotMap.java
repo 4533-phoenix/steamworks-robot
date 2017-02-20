@@ -55,6 +55,9 @@ public class RobotMap {
 	//AIO
 	public static int FRONTDISTANCE = 2; //Ultrasonic Sensor
 	
+	//Relay
+	//public static int AGITATOR_MOTOR = 0;
+	
 	public static boolean isPractice() {
 		return CLIMB_MOTOR == 6;
 	}

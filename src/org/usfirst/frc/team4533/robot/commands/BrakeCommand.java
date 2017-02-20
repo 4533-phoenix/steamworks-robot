@@ -1,23 +1,24 @@
 package org.usfirst.frc.team4533.robot.commands;
 
+import org.usfirst.frc.team4533.robot.Robot;
 import org.usfirst.frc.team4533.robot.subsystems.ClimbSystem;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class BrakeCommand extends Command{
 	public BrakeCommand() {
-		climber = ClimbSystem.getInstance();
+		requires(Robot.climb);
 	}
 	
 	private ClimbSystem climber;
 	
 	@Override
 	protected void execute() {
-		climber.brake();
+		Robot.climb.brake();
 	}
 	
 	@Override
 	protected boolean isFinished() {
-		climber.brake();
+		Robot.climb.brake();
 		return false;
 	}
 	

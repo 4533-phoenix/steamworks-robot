@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4533.robot.commands;
 
+import org.usfirst.frc.team4533.robot.Robot;
 import org.usfirst.frc.team4533.robot.subsystems.ShooterSystem;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -9,17 +10,17 @@ public class DoorOpen extends Command {
 	private ShooterSystem shooter;
 	
 	public DoorOpen() {
-		this.shooter = ShooterSystem.getInstance();
+		requires(Robot.shooter);
 	}
 	
 	@Override
 	public void execute() {	
-		this.shooter.openDoor();
+		Robot.shooter.openDoor();
 	}
 	
 	@Override
 	public void end() {
-		this.shooter.closeDoor();
+		Robot.shooter.closeDoor();
 	}
 
 	@Override

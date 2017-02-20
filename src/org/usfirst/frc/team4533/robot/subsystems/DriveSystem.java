@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team4533.robot.subsystems;
 
+import org.usfirst.frc.team4533.robot.Robot;
 import org.usfirst.frc.team4533.robot.RobotMap;
 import org.usfirst.frc.team4533.robot.commands.DriveWithJoystick;
 
@@ -89,20 +90,20 @@ public class DriveSystem extends Subsystem {
 		} else {
 			ro = 1;
 		}
-		this.drive(getControlSpeed(driver.getY(), 5) * ro, getControlSpeed(driver.getRawAxis(3), 5) * ro);
+		this.drive(getControlSpeed(driver.getY()) * ro, getControlSpeed(driver.getRawAxis(3)) * ro);
 
 	}
 
-	public static double getControlSpeed(double x, int seed) {
+	public static double getControlSpeed(double x) {
 		double control = 0.0;
 		if (x > 0) {
-			control = (1 - Math.pow(seed, x)) / (1 - seed);
+			control = (1 - Math.pow(Robot.seed, x)) / (1 - Robot.seed);
 		} else {
-			control = -((1 - Math.pow(seed, -x)) / (1 - seed));
+			control = -((1 - Math.pow(Robot.seed, -x)) / (1 - Robot.seed));
 		}
-		return control;
+		double scalingFactor = Robot.maxSpeed/100.0;
+		return (control*scalingFactor);
 	}
-
 	public void forward(double value) {
 		this.drive(value, value);
 	}
