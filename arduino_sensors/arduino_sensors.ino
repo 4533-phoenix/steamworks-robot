@@ -94,6 +94,7 @@ void setup() {
   {
     Serial.println("GYRO ONLINE");
   }
+  t.every(15, printData);
 
 }
 
