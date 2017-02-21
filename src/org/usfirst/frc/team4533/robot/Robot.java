@@ -4,7 +4,7 @@ package org.usfirst.frc.team4533.robot;
 import org.usfirst.frc.team4533.robot.subsystems.ClimbSystem;
 import org.usfirst.frc.team4533.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team4533.robot.subsystems.ShooterSystem;
-import org.usfirst.frc.team4533.robot.utils.SensorData;
+import org.usfirst.frc.team4533.robot.utils.Arduino;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
@@ -59,6 +59,9 @@ public class Robot extends IterativeRobot {
     	prefs = Preferences.getInstance();
     	seed = 5;
     	maxSpeed = 100;
+    	
+    	// Start up our Arduino data feed
+    	Arduino.initialize();
     }
     	
 	
@@ -87,6 +90,7 @@ public class Robot extends IterativeRobot {
 	
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		Arduino.update();
 		updateSmartDashboard();
 	}
 	/**
@@ -107,6 +111,7 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+		Arduino.update();
 		updateSmartDashboard();
     }
 
@@ -123,6 +128,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+		Arduino.update();
 		updateSmartDashboard();
     }
     
@@ -131,6 +137,7 @@ public class Robot extends IterativeRobot {
      */
     public void testPeriodic() {
         LiveWindow.run();
+		Arduino.update();
 		updateSmartDashboard();
     }
 }
