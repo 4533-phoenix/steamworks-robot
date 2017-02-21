@@ -45,13 +45,13 @@ void printData() {
     dif = X_CENTER - CenterOfBlocks;
     if (dif < -5) {
       sprintf(buffer, "^%s~%s~%s~", "PIXY", "direction", "right");
-      Serial.print(buffer);
+      Serial.write(buffer);
     } else if (dif > 5) {
       sprintf(buffer, "^%s~%s~%s~", "PIXY", "direction", "left");
-      Serial.print(buffer);
+      Serial.write(buffer);
     } else {
       sprintf(buffer, "^%s~%s~%s~", "PIXY", "direction", "straight");
-      Serial.print(buffer);
+      Serial.write(buffer);
     }
     if (debug) {
       Serial.println("");
@@ -62,7 +62,7 @@ void printData() {
 
   //LIDAR STUFF
   sprintf(buffer, "^%s~%s~%d~", "LIDAR", "cm", lidar.distance());
-  Serial.print(buffer);
+  Serial.write(buffer);
   if (debug) {
     Serial.println("");
   }
@@ -72,7 +72,7 @@ void printData() {
   {
     dtostrf(orientation.heading, 5, 2 , buf);
     sprintf(buffer, "^%s~%s~%s~", "GYRO", "heading", buf);
-    Serial.print(buffer);
+    Serial.write(buffer);
   }
   if (debug) {
     Serial.println("");
