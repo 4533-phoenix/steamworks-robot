@@ -27,8 +27,9 @@ public class DriveInBox extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	for(int i = 0; i <= 3; i++){
-    	addSequential(new TimeDriveForward(3));
-    	addSequential(new AutoRotate(90));
+    	//addSequential(new TimeDriveForward(3));
+    	addSequential(new DriveWithDistanceReading(.3,36,-1));
+    	addSequential(new AutoRotate(.75));
     	}
     }
 }

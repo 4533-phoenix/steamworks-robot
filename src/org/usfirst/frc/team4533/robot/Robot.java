@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team4533.robot;
 
+import org.usfirst.frc.team4533.robot.commands.DriveInBox;
 import org.usfirst.frc.team4533.robot.subsystems.ClimbSystem;
 import org.usfirst.frc.team4533.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team4533.robot.subsystems.ShooterSystem;
@@ -55,6 +56,7 @@ public class Robot extends IterativeRobot {
     	prefs = Preferences.getInstance();
     	seed = 5;
     	maxSpeed = 100;
+    	autonomousCommand = new DriveInBox();
     }
     	
 	
@@ -80,7 +82,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-
+    	 if (autonomousCommand != null) autonomousCommand.start();
     }
 
     /**
