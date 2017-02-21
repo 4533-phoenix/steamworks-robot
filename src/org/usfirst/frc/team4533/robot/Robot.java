@@ -62,6 +62,20 @@ public class Robot extends IterativeRobot {
     }
     	
 	
+    /**
+     * This function updates our smart dashboard values. It should probably be called periodically 
+     */
+    public void updateSmartDashboard() {
+        SmartDashboard.putBoolean("Gear", DriveSystem.hasGear());
+        SmartDashboard.putBoolean("Climber On?", ClimbSystem.isOn());
+        SmartDashboard.putNumber("Front Distance", DriveSystem.ultraSonic());
+        String messageOfTheDay = "don't do school stay in drugs";
+		SmartDashboard.putString("Message Of The Day", messageOfTheDay);
+		SmartDashboard.putString("PIXY", Robot.pixyGuidance);
+		SmartDashboard.putNumber("LIDAR", Robot.rearDistance);
+		SmartDashboard.putNumber("HEADING", Robot.heading);
+    }
+    
 	/**
      * This function is called once each time the robot enters Disabled mode.
      * You can use it to reset any subsystem information you want to clear when
@@ -73,6 +87,7 @@ public class Robot extends IterativeRobot {
 	
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		updateSmartDashboard();
 	}
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select between different autonomous modes
@@ -92,6 +107,7 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+		updateSmartDashboard();
     }
 
     public void teleopInit() {
@@ -107,15 +123,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        SmartDashboard.putBoolean("Gear", DriveSystem.hasGear());
-        SmartDashboard.putBoolean("Climber On?", ClimbSystem.isOn());
-        SmartDashboard.putNumber("Front Distance", DriveSystem.ultraSonic());
-        String messageOfTheDay = "don't do school stay in drugs";
-		SmartDashboard.putString("Message Of The Day", messageOfTheDay);
-		SmartDashboard.putString("PIXY", DriveSystem.pixyValue());
-		SmartDashboard.putNumber("LIDAR", DriveSystem.lidarValue());
-		//arduino.update();
-		
+		updateSmartDashboard();
     }
     
     /**
@@ -123,5 +131,6 @@ public class Robot extends IterativeRobot {
      */
     public void testPeriodic() {
         LiveWindow.run();
+		updateSmartDashboard();
     }
 }
