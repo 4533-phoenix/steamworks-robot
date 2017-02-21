@@ -28,12 +28,16 @@ public class Robot extends IterativeRobot {
 	public static ShooterSystem shooter;
 	public static OI oi;
     private CommandGroup autonomousCommand;
-    public static double heading;
-    public static SensorData data;
     public SendableChooser seedChooser;
     public static int seed;
     public static int maxSpeed;
     Preferences prefs;
+
+    // Sensors
+    public static double heading;       // Arduino : 9DOF Magnetometer
+    public static double rearDistance;  // Arduino : LIDAR-LITE v3
+    public static String pixyGuidance;  // Arduino : PIXY Camera
+    
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
