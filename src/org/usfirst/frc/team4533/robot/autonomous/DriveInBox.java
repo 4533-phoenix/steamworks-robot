@@ -1,6 +1,7 @@
-package org.usfirst.frc.team4533.robot.commands;
+package org.usfirst.frc.team4533.robot.autonomous;
 
-import org.usfirst.frc.team4533.robot.Robot;
+import org.usfirst.frc.team4533.robot.commands.AutoRotate;
+import org.usfirst.frc.team4533.robot.commands.TimeDriveForward;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -26,10 +27,18 @@ public class DriveInBox extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	for(int i = 0; i <= 3; i++){
-    	//addSequential(new TimeDriveForward(3));
-    	addSequential(new DriveWithDistanceReading(.3,36,-1));
-    	addSequential(new AutoRotate(.75));
-    	}
+
+    	addSequential(new TimeDriveForward(2,.3));
+    	addSequential(new TimeDriveForward(2,0));
+    	addSequential(new AutoRotate(90));
+    	addSequential(new TimeDriveForward(2,.3));
+    	addSequential(new TimeDriveForward(2,0));
+    	addSequential(new AutoRotate(90));
+    	addSequential(new TimeDriveForward(2,.3));
+    	addSequential(new TimeDriveForward(2,0));
+    	addSequential(new AutoRotate(90));
+    	addSequential(new TimeDriveForward(2,.3));
+    	addSequential(new TimeDriveForward(2,0));
+    	addSequential(new AutoRotate(90));
     }
 }

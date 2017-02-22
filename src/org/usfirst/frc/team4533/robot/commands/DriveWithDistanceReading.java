@@ -8,10 +8,12 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DriveWithDistanceReading extends Command {
 	private final double speed;
 	private double frontDistance;
+	private double rearDistance;
 	
 	public DriveWithDistanceReading(double speed, double frontDistance, double rearDistance) {
 		this.speed = speed;
 		this.frontDistance = frontDistance;
+		this.rearDistance = rearDistance;
 		requires(Robot.drive);
 	}
 
@@ -35,7 +37,7 @@ public class DriveWithDistanceReading extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		if (DriveSystem.ultraSonic() < frontDistance) {
+		if (DriveSystem.ultraSonic() < frontDistance || Robot.rearDistance > rearDistance) {
 			return true;
 
 		}

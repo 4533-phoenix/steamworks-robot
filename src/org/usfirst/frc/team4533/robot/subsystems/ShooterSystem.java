@@ -35,11 +35,11 @@ public class ShooterSystem extends Subsystem {
 	}
 	
 	public void openDoor() {
-		door.set(RobotMap.DOOR);
+		door.set(-RobotMap.DOOR);
 	}
 	
 	public void closeDoor() {
-		door.set(-RobotMap.DOOR);
+		door.set(RobotMap.DOOR);
 	}
 	
 	public void stopFlywheel() {

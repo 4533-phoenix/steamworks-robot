@@ -55,8 +55,9 @@ public class Arduino {
 				// them
 				while (c < buffer.length() && numFields != 3) {
 					if (buffer.charAt(c) == separatorChar) {
-						c++;
+						numFields++;
 					}
+					c++;
 				}
 
 				// Check to see if we've seen a complete data packet
@@ -75,7 +76,10 @@ public class Arduino {
 						break;
 					case "GYRO":
 						try {
-							Robot.heading = Double.parseDouble(data[2]);
+							double heading = Double.parseDouble(data[2]);
+							if (heading != 0) {
+								Robot.heading = heading;
+							}
 						} catch (NumberFormatException e) {
 							continue;
 						}

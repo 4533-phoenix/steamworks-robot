@@ -1,7 +1,7 @@
 
 package org.usfirst.frc.team4533.robot;
 
-import org.usfirst.frc.team4533.robot.commands.DriveInBox;
+import org.usfirst.frc.team4533.robot.autonomous.DriveInBox;
 import org.usfirst.frc.team4533.robot.subsystems.ClimbSystem;
 import org.usfirst.frc.team4533.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team4533.robot.subsystems.ShooterSystem;
@@ -44,7 +44,7 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-    	String bot = "Practice";
+    	String bot = "Main";
     	if (bot.equals("Practice")) {
     		RobotMap.setPracticeBot();
     	}
@@ -65,7 +65,10 @@ public class Robot extends IterativeRobot {
     	
     	// Start up our Arduino data feed
     	Arduino.initialize();
-    }
+    	Robot.pixyGuidance = "straight";
+    	Robot.rearDistance = 0;
+    	Robot.heading = 0;
+    	}
     	
 	
     /**
@@ -75,8 +78,6 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putBoolean("Gear", DriveSystem.hasGear());
         SmartDashboard.putBoolean("Climber On?", ClimbSystem.isOn());
         SmartDashboard.putNumber("Front Distance", DriveSystem.ultraSonic());
-        String messageOfTheDay = "don't do school stay in drugs";
-		SmartDashboard.putString("Message Of The Day", messageOfTheDay);
 		SmartDashboard.putString("PIXY", Robot.pixyGuidance);
 		SmartDashboard.putNumber("LIDAR", Robot.rearDistance);
 		SmartDashboard.putNumber("HEADING", Robot.heading);

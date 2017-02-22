@@ -19,7 +19,7 @@ public class OI {
 		flyBtn.toggleWhenPressed(new ShootCommand());
 		doorBtn.whileHeld(new DoorOpen());
 		agitator.toggleWhenPressed(new AgitatorCommand());
-		testingButton.whenPressed(new DriveWithDistanceReading(-1,24,0));
+		testingButton.whenPressed(new AutoRotate(30));
 	}
 	public static OI getInstance(){
 		return INSTANCE;
