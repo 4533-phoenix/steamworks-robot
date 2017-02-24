@@ -32,6 +32,7 @@ public class Robot extends IterativeRobot {
     public SendableChooser seedChooser;
     public static int seed;
     public static int maxSpeed;
+    public static double joystk_deadzone;
     Preferences prefs;
 
     // Sensors
@@ -60,6 +61,7 @@ public class Robot extends IterativeRobot {
     	prefs = Preferences.getInstance();
     	seed = 3;
     	maxSpeed = 100;
+    	joystk_deadzone = 0.1;
 
     	autonomousCommand = new DriveInBox();
     	
