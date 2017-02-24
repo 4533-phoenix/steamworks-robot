@@ -36,8 +36,9 @@ public class AutoRotate extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		double heading = Robot.heading;
-		double offset = Math.floorMod((long)Math.abs(heading - startHeading), (long)360);
+		double currentHeading = Robot.heading;
+
+		double offset = Math.floorMod((long)Math.abs(currentHeading - startHeading), (long)360);
 		if (offset > 180) {
 			offset = Math.abs(offset - 360);
 		}
