@@ -38,12 +38,13 @@ public class AutoRotate extends Command {
 	protected boolean isFinished() {
 		double currentHeading = Robot.heading;
 
-		double offset = Math.floorMod((long)Math.abs(currentHeading - startHeading), (long)360);
+		double offset = Math.floorMod((long) Math.abs(currentHeading - startHeading), (long) 360);
 		if (offset > 180) {
 			offset = Math.abs(offset - 360);
 		}
 		if (offset > Math.abs(toRotate)) {
-			System.out.println("Stopping rotation at " + offset);
+			System.out.println("Beep boop! Stopping rotation at " + offset + " from a starting heading of "
+					+ startHeading + " and a desire rotation of " + toRotate + "...");
 			return true;
 		}
 		return false;
