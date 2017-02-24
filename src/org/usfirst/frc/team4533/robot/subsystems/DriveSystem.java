@@ -77,9 +77,9 @@ public class DriveSystem extends Subsystem {
 	}
 
 	public void drive(double left, double right) {
-		this.leftMaster.set(left);
-		this.leftSlave.set(RobotMap.Motor_Left_Master);
-		this.rightMaster.set(-right);
+		this.leftMaster.set(-left);
+		this.leftSlave.set(RobotMap.Motor_Left_Master); 
+		this.rightMaster.set(right);
 		this.rightSlave.set(RobotMap.Motor_Right_Master);
 	}
 
@@ -90,17 +90,19 @@ public class DriveSystem extends Subsystem {
 		} else {
 			ro = 1;
 		}
-		this.drive(getControlSpeed(driver.getY()) * ro, getControlSpeed(driver.getRawAxis(3)) * ro);
-
+//		this.drive(getControlSpeed(driver.getY()) * ro, getControlSpeed(driver.getRawAxis(3)) * ro);
+		this.drive(driver.getY(), driver.getRawAxis(3));
+		
 	}
 
 	public static double getControlSpeed(double x) {
 		double control = 0.0;
-		if (x > 0) {
-			control = (1 - Math.pow(Robot.seed, x)) / (1 - Robot.seed);
-		} else {
-			control = -((1 - Math.pow(Robot.seed, -x)) / (1 - Robot.seed));
-		}
+		control = Math.copySign(1.0, x) * (Math.pow(Math.abs(x), Robot.seed));
+		//if (x > 0) {
+			//control = (1 - Math.pow(Robot.seed, x)) / (1 - Robot.seed);
+		//} else {
+		//	control = -((1 - Math.pow(Robot.seed, -x)) / (1 - Robot.seed));
+		//}
 		double scalingFactor = Robot.maxSpeed/100.0;
 		return (control*scalingFactor);
 	}

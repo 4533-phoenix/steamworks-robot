@@ -29,13 +29,13 @@ public class DriveInBox extends CommandGroup {
         // arm.
 
     	addSequential(new TimeDriveForward(2,.3));
-    	addSequential(new TimeDriveForward(2,0));
+    	addSequential(new TimeDriveForward(0.5,0));
     	addSequential(new AutoRotate(90));
     	addSequential(new TimeDriveForward(2,.3));
-    	addSequential(new TimeDriveForward(2,0));
+    	addSequential(new TimeDriveForward(0.5,0));
     	addSequential(new AutoRotate(90));
     	addSequential(new TimeDriveForward(2,.3));
-    	addSequential(new TimeDriveForward(2,0));
+    	addSequential(new TimeDriveForward(0.5,0));
     	addSequential(new AutoRotate(90));
     	addSequential(new TimeDriveForward(2,.3));
     	addSequential(new TimeDriveForward(2,0));

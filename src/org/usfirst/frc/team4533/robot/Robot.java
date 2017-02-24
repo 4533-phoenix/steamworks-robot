@@ -44,7 +44,7 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-    	String bot = "Main";
+    	String bot = "Practice";
     	if (bot.equals("Practice")) {
     		RobotMap.setPracticeBot();
     	}
@@ -58,7 +58,7 @@ public class Robot extends IterativeRobot {
     	//seedChooser.addObject("2", seed = 2);
     	//seedChooser.addObject("8", seed = 8);
     	prefs = Preferences.getInstance();
-    	seed = 5;
+    	seed = 3;
     	maxSpeed = 100;
 
     	autonomousCommand = new DriveInBox();
