@@ -43,7 +43,7 @@ public class AutoRotate extends Command {
 			offset = Math.abs(offset - 360);
 		}
 		if (offset > Math.abs(toRotate)) {
-			System.out.println("Beep boop! Stopping rotation at " + offset + " from a starting heading of "
+			System.out.println("Beep boop! Stopping rotation at " + offset + "@ degree " + currentHeading + " from a starting heading of "
 					+ startHeading + " and a desire rotation of " + toRotate + "...");
 			return true;
 		}
