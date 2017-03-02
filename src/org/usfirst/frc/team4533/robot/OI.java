@@ -9,7 +9,7 @@ public class OI {
 	private static OI INSTANCE;
 	JoystickButton climbBtn = new JoystickButton(stick, RobotMap.B_BUTTON);
 	JoystickButton flyBtn = new JoystickButton(stick, RobotMap.RIGHT_BUMPER);
-	JoystickButton doorBtn = new JoystickButton(stick, RobotMap.RIGHT_TRIGGER);
+	JoystickButton agitatorBtn = new JoystickButton(stick, RobotMap.RIGHT_TRIGGER);
 	JoystickButton agitator = new JoystickButton(stick, RobotMap.LEFT_BUMPER);
 	JoystickButton testingButton = new JoystickButton(stick, RobotMap.A_BUTTON);
 	OI() {
@@ -17,9 +17,8 @@ public class OI {
 		climbBtn.whileHeld(new ClimbCommand());
 		//climbBtn.whenReleased(new BrakeCommand());
 		flyBtn.toggleWhenPressed(new ShootCommand());
-		doorBtn.whileHeld(new DoorOpen());
-		agitator.toggleWhenPressed(new AgitatorCommand());
-		testingButton.whenPressed(new AutoRotate(30));
+		agitatorBtn.toggleWhenPressed(new AgitatorCommand());
+		//testingButton.whenPressed(new AutoRotate(30));
 	}
 	public static OI getInstance(){
 		return INSTANCE;

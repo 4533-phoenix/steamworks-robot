@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class MiddeDriveStationAutonomous extends CommandGroup{
 
     public MiddeDriveStationAutonomous() {
-        addSequential(new DriveWithDistanceReading(.5, -1, 91.3));
+        addSequential(new DriveWithDistanceReading(.5, -1, 231.9));
     }
 
 }

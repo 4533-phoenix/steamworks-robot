@@ -4,7 +4,6 @@ package org.usfirst.frc.team4533.robot.subsystems;
 import org.usfirst.frc.team4533.robot.Robot;
 import org.usfirst.frc.team4533.robot.RobotMap;
 import org.usfirst.frc.team4533.robot.commands.DriveWithJoystick;
-
 import org.usfirst.frc.team4533.robot.utils.SensorData;
 import org.usfirst.frc.team4533.robot.utils.SensorUtilities;
 
@@ -77,9 +76,9 @@ public class DriveSystem extends Subsystem {
 	}
 
 	public void drive(double left, double right) {
-		this.leftMaster.set(-left);
+		this.leftMaster.set(left);
 		this.leftSlave.set(RobotMap.Motor_Left_Master); 
-		this.rightMaster.set(right);
+		this.rightMaster.set(-right);
 		this.rightSlave.set(RobotMap.Motor_Right_Master);
 	}
 
@@ -88,10 +87,14 @@ public class DriveSystem extends Subsystem {
 		if (RobotMap.isPractice()) {
 			ro = -1;
 		} else {
-			ro = 1;
+			ro = -1;
 		}
+		
+		double left = driver.getRawAxis(3);
+		double right = driver.getY();
+		
 //		this.drive(getControlSpeed(driver.getY()) * ro, getControlSpeed(driver.getRawAxis(3)) * ro);
-		this.drive(driver.getY(), driver.getRawAxis(3));
+		this.drive(left, right);
 		
 	}
 
@@ -131,7 +134,7 @@ public class DriveSystem extends Subsystem {
 	}
 
 	public void turnLeft() {
-		this.turnLeft(-.5, .5);
+		this.turnLeft(.5, -.5);
 	}
 
 	public void turnRight(double value1, double value2) {
@@ -139,7 +142,7 @@ public class DriveSystem extends Subsystem {
 	}
 
 	public void turnRight() {
-		this.turnRight(.5, -.5);
+		this.turnRight(-.5, .5);
 	}
 
 	public static double ultraSonic() {

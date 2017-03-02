@@ -12,12 +12,10 @@ public class ShooterSystem extends Subsystem {
 	
 	private static ShooterSystem INSTANCE;
 	CANTalon flyWheel;
-	Spark door;
-	Relay agitator;
+	Spark agitator;
 	public ShooterSystem() {
 		flyWheel = new CANTalon(RobotMap.FLY_WHEEL_MOTOR);
-		door = new Spark(RobotMap.DOOR_MOTOR);
-		agitator = new Relay(0);
+		agitator = new Spark(RobotMap.AGITATOR_MOTOR);
 	}
 	
 	public static void initialize() {
@@ -34,25 +32,16 @@ public class ShooterSystem extends Subsystem {
 		flyWheel.set(RobotMap.FLY_VOLTAGE);
 	}
 	
-	public void openDoor() {
-		door.set(-RobotMap.DOOR);
+	public void startAgitator() {
+		agitator.set(RobotMap.AGITATOR_SPEED);
 	}
 	
-	public void closeDoor() {
-		door.set(RobotMap.DOOR);
+	public void stopAgitator() {
+		agitator.set(0);
 	}
 	
 	public void stopFlywheel() {
 		flyWheel.set(0);
-	}
-	public void startAgitator() {
-		agitator.set(Relay.Value.kForward);
-	}
-	public void reverseAgitator() {
-		agitator.set(Relay.Value.kReverse);
-	}
-	public void stopAgitator() {
-		agitator.set(Relay.Value.kOff);
 	}
 	
 	protected void initDefaultCommand() {

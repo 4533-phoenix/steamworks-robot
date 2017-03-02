@@ -38,11 +38,12 @@ public class Robot extends IterativeRobot {
     public static int maxSpeed;
     public static double joystk_deadzone;
     Preferences prefs;
+    public static int seed;
 
     // Sensors
     public static double heading;       // Arduino : 9DOF Magnetometer
     public static double rearDistance;  // Arduino : LIDAR-LITE v3
-    public static String pixyGuidance;  // Arduino : PIXY Camera
+    public static String pixyGuidance;  //  : PIXY Camera
     
     /**
      * This function is run when the robot is first started up and should be
@@ -69,7 +70,7 @@ public class Robot extends IterativeRobot {
     	autonomousCommand = new DriveInBox();
     	
     	// Start up our Arduino data feed
-    	Arduino.initialize();
+    	//Arduino.initialize();
     	Robot.pixyGuidance = "straight";
     	Robot.rearDistance = 0;
     	Robot.heading = 0;
@@ -99,7 +100,7 @@ public class Robot extends IterativeRobot {
 	
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-		Arduino.update();
+		//Arduino.update();
 		updateSmartDashboard();
 	}
 	/**
@@ -125,7 +126,7 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-		Arduino.update();
+		//Arduino.update();
 		updateSmartDashboard();
     }
 
@@ -142,7 +143,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-		Arduino.update();
+		//Arduino.update();
 		updateSmartDashboard();
     }
     
@@ -151,7 +152,7 @@ public class Robot extends IterativeRobot {
      */
     public void testPeriodic() {
         LiveWindow.run();
-		Arduino.update();
+		//Arduino.update();
 		updateSmartDashboard();
     }
 }

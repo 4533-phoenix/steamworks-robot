@@ -43,11 +43,11 @@ public class RobotMap {
 	public static double DEFAULT_SPEED = .5;
 	public static double CLIMB_SPEED = 1;
 	public static double FLY_VOLTAGE = 1;
-	public static double DOOR = 0.5;
+	public static double AGITATOR_SPEED = 0.8;
 
 	// pwm
 	public static int CLIMB_MOTOR = 0;
-	public static int DOOR_MOTOR = 1;
+	public static int AGITATOR_MOTOR = 1;
 	
 	//DIO
 	public static int GEAR_SENSOR = 9;
@@ -76,6 +76,5 @@ public class RobotMap {
 		DEFAULT_SPEED = .5;
 		CLIMB_SPEED = 1;
 		FLY_VOLTAGE = 1;
-		DOOR_MOTOR = 7;
 	}
 }
