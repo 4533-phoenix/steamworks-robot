@@ -5,10 +5,10 @@ import org.usfirst.frc.team4533.robot.autonomous.DriveInBox;
 import org.usfirst.frc.team4533.robot.autonomous.LeftAutonomous;
 import org.usfirst.frc.team4533.robot.autonomous.MiddeDriveStationAutonomous;
 import org.usfirst.frc.team4533.robot.autonomous.RightAutonomous;
+import org.usfirst.frc.team4533.robot.subsystems.AgitatorSystem;
 import org.usfirst.frc.team4533.robot.subsystems.ClimbSystem;
 import org.usfirst.frc.team4533.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team4533.robot.subsystems.ShooterSystem;
-import org.usfirst.frc.team4533.robot.utils.Arduino;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
@@ -31,6 +31,7 @@ public class Robot extends IterativeRobot {
 	public static DriveSystem drive;
 	public static ClimbSystem climb;
 	public static ShooterSystem shooter;
+	public static AgitatorSystem agitator;
 	public static OI oi;
     private CommandGroup autonomousCommand;
     public SendableChooser AutoChooser;
@@ -57,6 +58,7 @@ public class Robot extends IterativeRobot {
     	drive = new DriveSystem();
     	climb = new ClimbSystem();
     	shooter = new ShooterSystem();
+    	agitator = new AgitatorSystem();
     	oi = new OI();
     	AutoChooser = new SendableChooser();
     	AutoChooser.addDefault("Middle", new MiddeDriveStationAutonomous());

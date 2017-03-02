@@ -1,7 +1,7 @@
 package org.usfirst.frc.team4533.robot.commands;
 
 import org.usfirst.frc.team4533.robot.Robot;
-import org.usfirst.frc.team4533.robot.subsystems.ShooterSystem;
+import org.usfirst.frc.team4533.robot.subsystems.AgitatorSystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -11,17 +11,17 @@ import edu.wpi.first.wpilibj.command.Command;
 public class AgitatorCommand extends Command {
 
     public AgitatorCommand() {
-    	requires(Robot.shooter);
+    	requires(Robot.agitator);
     }
-    private ShooterSystem agitator;
+    private AgitatorSystem agitator;
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.shooter.stopAgitator();
+    	Robot.agitator.stopAgitator();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shooter.startAgitator();
+    	Robot.agitator.startAgitator();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -31,13 +31,13 @@ public class AgitatorCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.shooter.stopAgitator();
+    	Robot.agitator.stopAgitator();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.shooter.stopAgitator();
+    	Robot.agitator.stopAgitator();
 
     }
 }

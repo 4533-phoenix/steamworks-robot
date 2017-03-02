@@ -12,10 +12,8 @@ public class ShooterSystem extends Subsystem {
 	
 	private static ShooterSystem INSTANCE;
 	CANTalon flyWheel;
-	Spark agitator;
 	public ShooterSystem() {
 		flyWheel = new CANTalon(RobotMap.FLY_WHEEL_MOTOR);
-		agitator = new Spark(RobotMap.AGITATOR_MOTOR);
 	}
 	
 	public static void initialize() {
@@ -30,14 +28,6 @@ public class ShooterSystem extends Subsystem {
 
 	public void startFlywheel() {
 		flyWheel.set(RobotMap.FLY_VOLTAGE);
-	}
-	
-	public void startAgitator() {
-		agitator.set(RobotMap.AGITATOR_SPEED);
-	}
-	
-	public void stopAgitator() {
-		agitator.set(0);
 	}
 	
 	public void stopFlywheel() {
