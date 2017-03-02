@@ -2,6 +2,9 @@
 package org.usfirst.frc.team4533.robot;
 
 import org.usfirst.frc.team4533.robot.autonomous.DriveInBox;
+import org.usfirst.frc.team4533.robot.autonomous.LeftAutonomous;
+import org.usfirst.frc.team4533.robot.autonomous.MiddeDriveStationAutonomous;
+import org.usfirst.frc.team4533.robot.autonomous.RightAutonomous;
 import org.usfirst.frc.team4533.robot.subsystems.ClimbSystem;
 import org.usfirst.frc.team4533.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team4533.robot.subsystems.ShooterSystem;
@@ -9,6 +12,7 @@ import org.usfirst.frc.team4533.robot.utils.Arduino;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
+import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -29,8 +33,8 @@ public class Robot extends IterativeRobot {
 	public static ShooterSystem shooter;
 	public static OI oi;
     private CommandGroup autonomousCommand;
-    public SendableChooser seedChooser;
-    public static int seed;
+    public SendableChooser AutoChooser;
+    public static Sendable AutoPosition;
     public static int maxSpeed;
     public static double joystk_deadzone;
     Preferences prefs;
@@ -45,7 +49,7 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-    	String bot = "Practice";
+    	String bot = "Main";
     	if (bot.equals("Practice")) {
     		RobotMap.setPracticeBot();
     	}
@@ -53,13 +57,12 @@ public class Robot extends IterativeRobot {
     	climb = new ClimbSystem();
     	shooter = new ShooterSystem();
     	oi = new OI();
-    	seedChooser = new SendableChooser();
-    	//seedChooser.addDefault("5", );
-    	//seedChooser.addObject("1", this.DriveSystem.getControlSpeed(2,4));//seed=1
-    	//seedChooser.addObject("2", seed = 2);
-    	//seedChooser.addObject("8", seed = 8);
+    	AutoChooser = new SendableChooser();
+    	AutoChooser.addDefault("Middle", new MiddeDriveStationAutonomous());
+    	AutoChooser.addObject("Left", new LeftAutonomous());
+    	AutoChooser.addObject("Right", new RightAutonomous());
     	prefs = Preferences.getInstance();
-    	seed = 3;
+    	SmartDashboard.putData("Autonomous mode chooser", AutoChooser);
     	maxSpeed = 100;
     	joystk_deadzone = 0.1;
 
@@ -109,9 +112,14 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-    	 if (autonomousCommand != null) autonomousCommand.start();
-    }
+    	this.autonomousCommand =
 
+    			//new DefaultAutonomous();
+
+    			(CommandGroup) AutoChooser.getSelected();		
+
+        this.autonomousCommand.start();													
+    }
     /**
      * This function is called periodically during autonomous
      */
