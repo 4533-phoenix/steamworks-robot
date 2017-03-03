@@ -1,4 +1,4 @@
-f#include <Adafruit_Sensor.h>
+#include <Adafruit_Sensor.h>
 #include <Adafruit_LSM303_U.h>
 #include <Adafruit_9DOF.h>
 #include <Adafruit_L3GD20_U.h>
@@ -18,12 +18,10 @@ String gyroPrint;
 Adafruit_9DOF                dof   = Adafruit_9DOF();
 Adafruit_LSM303_Mag_Unified   mag   = Adafruit_LSM303_Mag_Unified(30302);
 int i;
-int compassCount = 0;
-double compassTotal = 0;
-
 
 void printData() {
-
+  sensors_vec_t orientation;
+  sensors_event_t mag_event;
   int dif;
   blocks = -1;
   char buffer[100];
@@ -69,11 +67,16 @@ void printData() {
     Serial.println("");
   }
 
-  dtostrf(compassTotal/(double)compassCount, 5, 2 , buf);
-  compassCount = 0;
-  compassTotal = 0;
-  sprintf(buffer, "^%s~%s~%s~", "GYRO", "heading", buf);
-  Serial.write(buffer);
+  mag.getEvent(&mag_event);
+  if (dof.magGetOrientation(SENSOR_AXIS_Z, &mag_event, &orientation))
+  {
+    dtostrf(orientation.heading, 5, 2 , buf);
+    sprintf(buffer, "^%s~%s~%s~", "GYRO", "heading", buf);
+    Serial.write(buffer);
+  }
+  if (debug) {
+    Serial.println("");
+  }
 }
 
 void setup() {
@@ -96,14 +99,7 @@ void setup() {
 }
 
 void loop() {
-  sensors_vec_t orientation;
-  sensors_event_t mag_event;
-  mag.getEvent(&mag_event);
-  if (dof.magGetOrientation(SENSOR_AXIS_Z, &mag_event, &orientation))
-  {
-    compassTotal += orientation.heading;
-  }
-  
+
   t.update();
 
 }
