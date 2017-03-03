@@ -20,7 +20,6 @@ public class OI {
 		//climbBtn.whenReleased(new BrakeCommand());
 		flyBtn.toggleWhenPressed(new ShootCommand());
 		agitatorBtn.toggleWhenPressed(new AgitatorCommand());
-		slowDriveButton.whileHeld(new SpeedChange());
 		//testingButton.whenPressed(new AutoRotate(30));
 	}
 	public static OI getInstance(){

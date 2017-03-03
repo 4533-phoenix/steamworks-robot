@@ -36,6 +36,8 @@ public class DriveSystem extends Subsystem {
 	static String name;
 	static String value;
 	static String unit;
+	Joystick stick;
+	
 
 	/*
 	 * 
@@ -64,6 +66,7 @@ public class DriveSystem extends Subsystem {
 		leftSlave.set(RobotMap.Motor_Left_Master);
 		ultraSonic = new AnalogInput(RobotMap.FRONTDISTANCE);
 		di = new DigitalInput(RobotMap.GEAR_SENSOR);
+		stick = new Joystick(RobotMap.JOYSTICK_PORT);
 	}
 
 	public static void initialize() {
@@ -95,7 +98,11 @@ public class DriveSystem extends Subsystem {
 		double right = driver.getY();
 		
 //		this.drive(getControlSpeed(driver.getY()) * ro, getControlSpeed(driver.getRawAxis(3)) * ro);
-		this.drive(left * SpeedChange.mod, right * SpeedChange.mod);
+		if(stick.getRawButton(RobotMap.LEFT_TRIGGER)){
+			this.drive(left * 0.5, right * 0.5);
+		}else{
+			this.drive(left, right);
+		}
 		
 	}
 
