@@ -7,15 +7,15 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class ClimbCommand extends Command {
 	private ClimbSystem climber;
-
-	public ClimbCommand() {
-
+	double voltage;
+	public ClimbCommand(double volts) {
 		requires(Robot.climb);
+		voltage = volts;
 	}
 
 	@Override
 	protected void execute() {
-		Robot.climb.climb();
+		Robot.climb.climb(voltage);
 
 	}
 

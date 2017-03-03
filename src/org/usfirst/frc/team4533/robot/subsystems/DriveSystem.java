@@ -4,6 +4,7 @@ package org.usfirst.frc.team4533.robot.subsystems;
 import org.usfirst.frc.team4533.robot.Robot;
 import org.usfirst.frc.team4533.robot.RobotMap;
 import org.usfirst.frc.team4533.robot.commands.DriveWithJoystick;
+import org.usfirst.frc.team4533.robot.commands.SpeedChange;
 import org.usfirst.frc.team4533.robot.utils.SensorData;
 import org.usfirst.frc.team4533.robot.utils.SensorUtilities;
 
@@ -94,7 +95,7 @@ public class DriveSystem extends Subsystem {
 		double right = driver.getY();
 		
 //		this.drive(getControlSpeed(driver.getY()) * ro, getControlSpeed(driver.getRawAxis(3)) * ro);
-		this.drive(left, right);
+		this.drive(left * SpeedChange.mod, right * SpeedChange.mod);
 		
 	}
 

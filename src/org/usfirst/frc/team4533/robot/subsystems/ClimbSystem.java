@@ -29,8 +29,8 @@ public class ClimbSystem extends Subsystem {
 		return INSTANCE;
 	}
 	
-	public void climb() {
-		climbMotor.set(RobotMap.CLIMB_SPEED);
+	public void climb(double volt) {
+		climbMotor.set(volt);
 		isClimb = true;
 	}
 	public void brake() {
