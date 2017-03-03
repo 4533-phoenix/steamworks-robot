@@ -98,11 +98,11 @@ public class DriveSystem extends Subsystem {
 		double right = driver.getY();
 		
 //		this.drive(getControlSpeed(driver.getY()) * ro, getControlSpeed(driver.getRawAxis(3)) * ro);
-		if(stick.getRawButton(RobotMap.LEFT_TRIGGER)){
+		if(stick.getRawButton(RobotMap.LEFT_BUMPER)){
 			this.drive(left * 0.5, right * 0.5);
 		}else{
 			this.drive(left, right);
-		}
+		}	
 		
 	}
 
