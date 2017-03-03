@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team4533.robot;
 
+import org.usfirst.frc.team4533.robot.autonomous.BaselineAutonomous;
 import org.usfirst.frc.team4533.robot.autonomous.DriveInBox;
 import org.usfirst.frc.team4533.robot.autonomous.LeftAutonomous;
 import org.usfirst.frc.team4533.robot.autonomous.MiddeDriveStationAutonomous;
@@ -9,6 +10,7 @@ import org.usfirst.frc.team4533.robot.subsystems.AgitatorSystem;
 import org.usfirst.frc.team4533.robot.subsystems.ClimbSystem;
 import org.usfirst.frc.team4533.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team4533.robot.subsystems.ShooterSystem;
+import org.usfirst.frc.team4533.robot.utils.Arduino;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
@@ -64,6 +66,7 @@ public class Robot extends IterativeRobot {
     	AutoChooser.addDefault("Middle", new MiddeDriveStationAutonomous());
     	AutoChooser.addObject("Left", new LeftAutonomous());
     	AutoChooser.addObject("Right", new RightAutonomous());
+    	AutoChooser.addObject("Baseline", new BaselineAutonomous());
     	prefs = Preferences.getInstance();
     	SmartDashboard.putData("Autonomous mode chooser", AutoChooser);
     	maxSpeed = 100;
@@ -72,7 +75,7 @@ public class Robot extends IterativeRobot {
     	autonomousCommand = new DriveInBox();
     	
     	// Start up our Arduino data feed
-    	//Arduino.initialize();
+    	Arduino.initialize();
     	Robot.pixyGuidance = "straight";
     	Robot.rearDistance = 0;
     	Robot.heading = 0;
@@ -102,7 +105,7 @@ public class Robot extends IterativeRobot {
 	
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-		//Arduino.update();
+		Arduino.update();
 		updateSmartDashboard();
 	}
 	/**
@@ -115,11 +118,9 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-    	this.autonomousCommand =
+    	this.autonomousCommand = new BaselineAutonomous();
 
-    			//new DefaultAutonomous();
-
-    			(CommandGroup) AutoChooser.getSelected();		
+    			//new DefaultAutonomous();	
 
         this.autonomousCommand.start();													
     }
@@ -128,7 +129,7 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-		//Arduino.update();
+		Arduino.update();
 		updateSmartDashboard();
     }
 
@@ -145,7 +146,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-		//Arduino.update();
+		Arduino.update();
 		updateSmartDashboard();
     }
     
@@ -154,7 +155,7 @@ public class Robot extends IterativeRobot {
      */
     public void testPeriodic() {
         LiveWindow.run();
-		//Arduino.update();
+		Arduino.update();
 		updateSmartDashboard();
     }
 }

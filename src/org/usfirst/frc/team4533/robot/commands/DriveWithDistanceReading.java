@@ -37,9 +37,14 @@ public class DriveWithDistanceReading extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		if (DriveSystem.ultraSonic() < frontDistance || Robot.rearDistance > rearDistance) {
-			return true;
-
+		if(frontDistance == -1){
+			if (Robot.rearDistance > rearDistance) {
+				return true;
+			}
+		}else{
+			if (DriveSystem.ultraSonic() < frontDistance || Robot.rearDistance > rearDistance){
+				return true;
+			}
 		}
 		return false;
 	}
