@@ -29,6 +29,12 @@ public class RobotMap {
 	public static int LEFT_STICK_BUTTON = 11;
 	public static int BACK_BUTTON = 9;
 	public static int START_BUTTON = 10;
+	public static int SQUARE = 4;
+	public static int CIRCLE = 2;
+	public static int TRIANGLE = 1;
+	public static int X = 3;
+	
+	
 	
 	// can
 	public static int Motor_Left_Master = 1;

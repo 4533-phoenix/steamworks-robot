@@ -42,6 +42,7 @@ public class Robot extends IterativeRobot {
     public static double joystk_deadzone;
     Preferences prefs;
     public static int seed;
+    int count;
 
     // Sensors
     public static double heading;       // Arduino : 9DOF Magnetometer
@@ -71,7 +72,7 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putData("Autonomous mode chooser", AutoChooser);
     	maxSpeed = 100;
     	joystk_deadzone = 0.1;
-
+    	count = 0;
     	autonomousCommand = new DriveInBox();
     	
     	// Start up our Arduino data feed
@@ -79,6 +80,7 @@ public class Robot extends IterativeRobot {
     	Robot.pixyGuidance = "straight";
     	Robot.rearDistance = 0;
     	Robot.heading = 0;
+    	System.out.println("finished robot init");
     	}
     	
 	
@@ -100,13 +102,18 @@ public class Robot extends IterativeRobot {
 	 * the robot is disabled.
      */
     public void disabledInit(){
-
+    	if(count++ % 10 == 0){
+    		System.out.println("disabled init  " + count);
+    	}
     }
 	
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 		Arduino.update();
 		updateSmartDashboard();
+		if(count++ % 10 == 0){
+			System.out.println("disabled periodic " + count);
+		}
 	}
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select between different autonomous modes
@@ -122,8 +129,11 @@ public class Robot extends IterativeRobot {
 
     			//new DefaultAutonomous();	
 
-        this.autonomousCommand.start();													
-    }
+        this.autonomousCommand.start();	
+		if(count++ % 10 == 0){
+			System.out.println("autonomous init  " + count);
+		}
+	}
     /**
      * This function is called periodically during autonomous
      */
@@ -131,15 +141,23 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
 		Arduino.update();
 		updateSmartDashboard();
-    }
+		if(count++ % 10 == 0){
+			System.out.println("autonomous periodic " + count);
+		}
+	}
 
     public void teleopInit() {
 		// This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        if (autonomousCommand != null) autonomousCommand.cancel();
-    }
+        if (autonomousCommand != null){
+        	autonomousCommand.cancel();
+        }
+		if(count++ % 10 == 0){
+			System.out.println("teleop init  " + count);
+		}
+	}
 
     /**
      * This function is called periodically during operator control
@@ -148,6 +166,9 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
 		Arduino.update();
 		updateSmartDashboard();
+		if(count++ % 10 == 0){
+			System.out.println("teleop periodic " + count);
+		}		
     }
     
     /**
@@ -157,5 +178,9 @@ public class Robot extends IterativeRobot {
         LiveWindow.run();
 		Arduino.update();
 		updateSmartDashboard();
+		if(count++ % 10 == 0){
+			System.out.println("test periodic " + count);
+		}
+
     }
 }
