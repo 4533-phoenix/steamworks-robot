@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class RightAutonomous extends CommandGroup {
     
     public  RightAutonomous() {
-    	addSequential(new DriveWithDistanceReading(.5,-1, 200));
+    	addSequential(new DriveWithDistanceReading(.5,-1, 173));
     	addSequential(new AutoRotate(-60));
     	addSequential(new DriveWithDistanceReading(.5, 9, -1));
     }

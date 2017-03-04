@@ -2,10 +2,10 @@
 package org.usfirst.frc.team4533.robot;
 
 import org.usfirst.frc.team4533.robot.autonomous.BaselineAutonomous;
-import org.usfirst.frc.team4533.robot.autonomous.DriveInBox;
 import org.usfirst.frc.team4533.robot.autonomous.LeftAutonomous;
 import org.usfirst.frc.team4533.robot.autonomous.MiddeDriveStationAutonomous;
 import org.usfirst.frc.team4533.robot.autonomous.RightAutonomous;
+import org.usfirst.frc.team4533.robot.commands.TimeDriveForward;
 import org.usfirst.frc.team4533.robot.subsystems.AgitatorSystem;
 import org.usfirst.frc.team4533.robot.subsystems.ClimbSystem;
 import org.usfirst.frc.team4533.robot.subsystems.DriveSystem;
@@ -13,6 +13,7 @@ import org.usfirst.frc.team4533.robot.subsystems.ShooterSystem;
 import org.usfirst.frc.team4533.robot.utils.Arduino;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -29,13 +30,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 	
-	//public static OI oi;
+	
 	public static DriveSystem drive;
 	public static ClimbSystem climb;
 	public static ShooterSystem shooter;
 	public static AgitatorSystem agitator;
 	public static OI oi;
-    private CommandGroup autonomousCommand;
+	private CommandGroup autonomousCommand;
     public SendableChooser AutoChooser;
     public static Sendable AutoPosition;
     public static int maxSpeed;
@@ -43,6 +44,8 @@ public class Robot extends IterativeRobot {
     Preferences prefs;
     public static int seed;
     int count;
+    
+    private PowerDistributionPanel pdp;
 
     // Sensors
     public static double heading;       // Arduino : 9DOF Magnetometer
@@ -58,6 +61,7 @@ public class Robot extends IterativeRobot {
     	if (bot.equals("Practice")) {
     		RobotMap.setPracticeBot();
     	}
+    	pdp = new PowerDistributionPanel(10);
     	drive = new DriveSystem();
     	climb = new ClimbSystem();
     	shooter = new ShooterSystem();
@@ -68,12 +72,13 @@ public class Robot extends IterativeRobot {
     	AutoChooser.addObject("Left", new LeftAutonomous());
     	AutoChooser.addObject("Right", new RightAutonomous());
     	AutoChooser.addObject("Baseline", new BaselineAutonomous());
+    	AutoChooser.addObject("TimedDriveForward", new TimeDriveForward(2, .5));
     	prefs = Preferences.getInstance();
     	SmartDashboard.putData("Autonomous mode chooser", AutoChooser);
     	maxSpeed = 100;
     	joystk_deadzone = 0.1;
     	count = 0;
-    	autonomousCommand = new DriveInBox();
+//    	autonomousCommand = new DriveInBox();
     	
     	// Start up our Arduino data feed
     	Arduino.initialize();
@@ -94,6 +99,11 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putString("PIXY", Robot.pixyGuidance);
 		SmartDashboard.putNumber("LIDAR", Robot.rearDistance);
 		SmartDashboard.putNumber("HEADING", Robot.heading);
+		
+		SmartDashboard.putNumber("PDP 12:", pdp.getCurrent(12));
+		SmartDashboard.putNumber("PDP 13:", pdp.getCurrent(13));
+		SmartDashboard.putNumber("PDP 14:", pdp.getCurrent(14));
+		SmartDashboard.putNumber("PDP 15", pdp.getCurrent(15));
     }
     
 	/**
@@ -125,7 +135,8 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-    	this.autonomousCommand = new BaselineAutonomous();
+    	this.autonomousCommand = (CommandGroup) AutoChooser.getSelected();
+//    	this.autonomousCommand = new TimeDriveForward(2, 0.5);
 
     			//new DefaultAutonomous();	
 

@@ -79,9 +79,9 @@ public class DriveSystem extends Subsystem {
 	}
 
 	public void drive(double left, double right) {
-		this.leftMaster.set(left);
+		this.leftMaster.set(-left);
 		this.leftSlave.set(RobotMap.Motor_Left_Master); 
-		this.rightMaster.set(-right);
+		this.rightMaster.set(right);
 		this.rightSlave.set(RobotMap.Motor_Right_Master);
 	}
 
