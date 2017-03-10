@@ -12,7 +12,7 @@ public class LeftAutonomous extends CommandGroup {
     
     public  LeftAutonomous() {
     	addSequential(new DriveWithDistanceReading(.3,-1, 173));
-    	addSequential(new AutoRotate(120));
+    	addSequential(new AutoRotate(120, AutoRotate.LEFT));
     	addSequential(new DriveWithDistanceReading(.3, 9, -1));
     }
 }

@@ -30,15 +30,15 @@ public class DriveInBox extends CommandGroup {
 
     	addSequential(new TimeDriveForward(2,.3));
     	addSequential(new TimeDriveForward(0.5,0));
-    	addSequential(new AutoRotate(90));
+    	addSequential(new AutoRotate(90, AutoRotate.RIGHT));
     	addSequential(new TimeDriveForward(2,.3));
     	addSequential(new TimeDriveForward(0.5,0));
-    	addSequential(new AutoRotate(90));
+    	addSequential(new AutoRotate(90, AutoRotate.RIGHT));
     	addSequential(new TimeDriveForward(2,.3));
     	addSequential(new TimeDriveForward(0.5,0));
-    	addSequential(new AutoRotate(90));
+    	addSequential(new AutoRotate(90, AutoRotate.RIGHT));
     	addSequential(new TimeDriveForward(2,.3));
     	addSequential(new TimeDriveForward(0.5,0));
-    	addSequential(new AutoRotate(90));
-    }
+    	addSequential(new AutoRotate(90, AutoRotate.RIGHT));
+    	}
 }

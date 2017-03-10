@@ -11,13 +11,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class AutoRotate extends Command {
 
-	boolean positive = true;
+	boolean direction;
 	double toRotate;
 	double startHeading;
-
-	public AutoRotate(double deg) {
+	
+	public static final boolean RIGHT = true;
+	public static final boolean LEFT = false;
+	//Accepts a certain degree as a parameter and a direction via AutoRotate.LEFT/RIGHT
+	public AutoRotate(double deg, boolean direct) {
 		requires(Robot.drive);
 		this.toRotate = deg;
+		this.direction = direct;
 	}
 
 	// Called just before this Command runs the first time
@@ -27,10 +31,13 @@ public class AutoRotate extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if (toRotate > 0) {
+		if (direction == AutoRotate.RIGHT) {
 			Robot.drive.turnRight(.25, -.25);
-		} else {
+		} else if (direction == AutoRotate.LEFT) {
 			Robot.drive.turnLeft(-.25, .25);
+		}
+		else{
+			Robot.drive.turnRight(.25, -.25);
 		}
 	}
 

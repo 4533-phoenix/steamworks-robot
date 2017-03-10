@@ -14,7 +14,7 @@ public class RightAutonomous extends CommandGroup {
     
     public  RightAutonomous() {
     	addSequential(new DriveWithDistanceReading(.3,-1, 173));
-    	addSequential(new AutoRotate(60));
+    	addSequential(new AutoRotate(60, AutoRotate.RIGHT));
     	addSequential(new DriveWithDistanceReading(.3, 9, -1));
     }
 }
