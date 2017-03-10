@@ -85,7 +85,6 @@ public class Robot extends IterativeRobot {
     	Robot.pixyGuidance = "straight";
     	Robot.rearDistance = 0;
     	Robot.heading = 0;
-    	System.out.println("finished robot init");
     	}
     	
 	
@@ -112,18 +111,12 @@ public class Robot extends IterativeRobot {
 	 * the robot is disabled.
      */
     public void disabledInit(){
-    	if(count++ % 10 == 0){
-    		System.out.println("disabled init  " + count);
-    	}
     }
 	
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 		Arduino.update();
 		updateSmartDashboard();
-		if(count++ % 10 == 0){
-			System.out.println("disabled periodic " + count);
-		}
 	}
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select between different autonomous modes
@@ -141,9 +134,6 @@ public class Robot extends IterativeRobot {
     			//new DefaultAutonomous();	
 
         this.autonomousCommand.start();	
-		if(count++ % 10 == 0){
-			System.out.println("autonomous init  " + count);
-		}
 	}
     /**
      * This function is called periodically during autonomous
@@ -152,9 +142,6 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
 		Arduino.update();
 		updateSmartDashboard();
-		if(count++ % 10 == 0){
-			System.out.println("autonomous periodic " + count);
-		}
 	}
 
     public void teleopInit() {
@@ -165,9 +152,6 @@ public class Robot extends IterativeRobot {
         if (autonomousCommand != null){
         	autonomousCommand.cancel();
         }
-		if(count++ % 10 == 0){
-			System.out.println("teleop init  " + count);
-		}
 	}
 
     /**
@@ -176,10 +160,7 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
 		Arduino.update();
-		updateSmartDashboard();
-		if(count++ % 10 == 0){
-			System.out.println("teleop periodic " + count);
-		}		
+		updateSmartDashboard();	
     }
     
     /**
@@ -189,9 +170,5 @@ public class Robot extends IterativeRobot {
         LiveWindow.run();
 		Arduino.update();
 		updateSmartDashboard();
-		if(count++ % 10 == 0){
-			System.out.println("test periodic " + count);
-		}
-
     }
 }

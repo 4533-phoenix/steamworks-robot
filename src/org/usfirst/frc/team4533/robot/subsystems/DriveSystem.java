@@ -151,7 +151,7 @@ public class DriveSystem extends Subsystem {
 	}
 
 	public static double ultraSonic() {
-		return (ultraSonic.getValue() / 8);
+		return (ultraSonic.getValue() / (8 * 2.54)); //The 8 is for getting accurate data, and the 2.54 is to convert to centimeters
 
 	}
 
