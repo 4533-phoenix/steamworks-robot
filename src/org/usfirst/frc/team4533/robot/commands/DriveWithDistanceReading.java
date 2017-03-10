@@ -11,7 +11,7 @@ public class DriveWithDistanceReading extends Command {
 	private double rearDistance;
 	
 	public DriveWithDistanceReading(double speed, double frontDistance, double rearDistance) {
-		this.speed = speed;
+		this.speed = -speed;
 		this.frontDistance = frontDistance;
 		this.rearDistance = rearDistance;
 		requires(Robot.drive);
@@ -42,7 +42,7 @@ public class DriveWithDistanceReading extends Command {
 				return true;
 			}
 		}else{
-			if (DriveSystem.ultraSonic() < frontDistance || Robot.rearDistance > rearDistance){
+			if (DriveSystem.ultraSonic() < frontDistance){
 				return true;
 			}
 		}

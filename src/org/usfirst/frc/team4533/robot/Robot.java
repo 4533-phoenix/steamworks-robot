@@ -135,7 +135,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-    	this.autonomousCommand = (CommandGroup) AutoChooser.getSelected();
+    	this.autonomousCommand = new LeftAutonomous();
 //    	this.autonomousCommand = new TimeDriveForward(2, 0.5);
 
     			//new DefaultAutonomous();	
