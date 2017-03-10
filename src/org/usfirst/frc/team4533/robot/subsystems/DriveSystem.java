@@ -5,7 +5,6 @@ import org.usfirst.frc.team4533.robot.Robot;
 import org.usfirst.frc.team4533.robot.RobotMap;
 import org.usfirst.frc.team4533.robot.commands.DriveWithJoystick;
 import org.usfirst.frc.team4533.robot.utils.SensorData;
-import org.usfirst.frc.team4533.robot.utils.SensorUtilities;
 
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.TalonControlMode;
@@ -14,7 +13,6 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -162,35 +160,6 @@ public class DriveSystem extends Subsystem {
 			return true;
 		} else {
 			return false;
-		}
-	}
-
-
-	public static int lidarValue() {
-		data = SensorUtilities.interpretSerial();
-		if (data != null) {
-			name = data.getName();
-			if (name == "LIDAR") {
-				return Integer.parseInt(value);
-			} else {
-				return (int) SmartDashboard.getNumber("LIDAR", 0.0);
-			}
-		} else {
-			return -1;
-		}
-	}
-
-	public static String pixyValue() {
-		data = SensorUtilities.interpretSerial();
-		if (data == null) {
-			return "";
-		} else {
-			name = data.getName();
-			if (name == "PIXY") {
-				return value;
-			} else {
-				return SmartDashboard.getString("PIXY", "straight");
-			}
 		}
 	}
 
