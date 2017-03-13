@@ -34,7 +34,6 @@ public class DriveSystem extends Subsystem {
 	static String value;
 	static String unit;
 	Joystick stick;
-	
 
 	/*
 	 * 
@@ -78,7 +77,7 @@ public class DriveSystem extends Subsystem {
 
 	public void drive(double left, double right) {
 		this.leftMaster.set(-left);
-		this.leftSlave.set(RobotMap.Motor_Left_Master); 
+		this.leftSlave.set(RobotMap.Motor_Left_Master);
 		this.rightMaster.set(right);
 		this.rightSlave.set(RobotMap.Motor_Right_Master);
 	}
@@ -86,34 +85,39 @@ public class DriveSystem extends Subsystem {
 	public void DriveWithJoystick(Joystick driver) {
 		int ro = 0;
 		if (RobotMap.isPractice()) {
-			ro = -1;
+			ro = 1;
 		} else {
-			ro = -1;
+			ro = 1;
 		}
-		
+
 		double left = driver.getRawAxis(3);
 		double right = driver.getY();
-		
-//		this.drive(getControlSpeed(driver.getY()) * ro, getControlSpeed(driver.getRawAxis(3)) * ro);
-		if(stick.getRawButton(RobotMap.LEFT_BUMPER)){
-			this.drive(left * 0.5, right * 0.5);
-		}else{
-			this.drive(left, right);
-		}	
-		
+
+		// this.drive(getControlSpeed(driver.getY()) * ro,
+		// getControlSpeed(driver.getRawAxis(3)) * ro);
+		if (stick.getRawButton(RobotMap.LEFT_BUMPER)) {
+			leftMaster.setVoltageRampRate(24);
+			rightMaster.setVoltageRampRate(24);
+			this.drive(getControlSpeed(right) * ro, getControlSpeed(left) * ro);
+		} else {
+			leftMaster.setVoltageRampRate(12);
+			rightMaster.setVoltageRampRate(12);
+			this.drive(getControlSpeed(right) * ro * 0.5, getControlSpeed(left) * ro * 0.5);
+		}
 	}
 
 	public static double getControlSpeed(double x) {
 		double control = 0.0;
 		control = Math.copySign(1.0, x) * (Math.pow(Math.abs(x), Robot.seed));
-		//if (x > 0) {
-			//control = (1 - Math.pow(Robot.seed, x)) / (1 - Robot.seed);
-		//} else {
-		//	control = -((1 - Math.pow(Robot.seed, -x)) / (1 - Robot.seed));
-		//}
-		double scalingFactor = Robot.maxSpeed/100.0;
-		return (control*scalingFactor);
+		// if (x > 0) {
+		// control = (1 - Math.pow(Robot.seed, x)) / (1 - Robot.seed);
+		// } else {
+		// control = -((1 - Math.pow(Robot.seed, -x)) / (1 - Robot.seed));
+		// }
+		double scalingFactor = Robot.maxSpeed / 100.0;
+		return (control * scalingFactor);
 	}
+
 	public void forward(double value) {
 		this.drive(value, value);
 	}
@@ -151,7 +155,11 @@ public class DriveSystem extends Subsystem {
 	}
 
 	public static double ultraSonic() {
-		return (ultraSonic.getValue() / (8 * 2.54)); //The 8 is for getting accurate data, and the 2.54 is to convert to centimeters
+		return (ultraSonic.getValue() / (8 * 2.54)); // The 8 is for getting
+														// accurate data, and
+														// the 2.54 is to
+														// convert to
+														// centimeters
 
 	}
 

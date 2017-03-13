@@ -12,5 +12,4 @@ public class BaselineAutonomous extends CommandGroup{
     public BaselineAutonomous() {
         addSequential(new DriveWithDistanceReading(-.5, -1, 350));
     }
-
 }

@@ -40,8 +40,8 @@ public class RobotMap {
 	public static int Motor_Left_Master = 1;
 	public static int Motor_Right_Master = 4;
 	public static int Motor_Left_Slave = 2;
-	public static int Motor_Right_Slave = 3;
-	public static int FLY_WHEEL_MOTOR = 5;
+	public static int Motor_Right_Slave = 5; //CHANGE BEFORE COMP
+	public static int FLY_WHEEL_MOTOR = 3;
 	// random stuff
 	
 	public static int JOYSTICK_PORT = 0;

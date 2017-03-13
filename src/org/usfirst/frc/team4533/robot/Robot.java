@@ -76,12 +76,13 @@ public class Robot extends IterativeRobot {
     	prefs = Preferences.getInstance();
     	SmartDashboard.putData("Autonomous mode chooser", AutoChooser);
     	maxSpeed = 100;
+    	seed = 1;
     	joystk_deadzone = 0.1;
     	count = 0;
 //    	autonomousCommand = new DriveInBox();
     	
     	// Start up our Arduino data feed
-    	Arduino.initialize();
+    	//Arduino.initialize();
     	Robot.pixyGuidance = "straight";
     	Robot.rearDistance = 0;
     	Robot.heading = 0;
@@ -92,17 +93,17 @@ public class Robot extends IterativeRobot {
      * This function updates our smart dashboard values. It should probably be called periodically 
      */
     public void updateSmartDashboard() {
-        SmartDashboard.putBoolean("Gear", DriveSystem.hasGear());
-        SmartDashboard.putBoolean("Climber On?", ClimbSystem.isOn());
-        SmartDashboard.putNumber("Front Distance", DriveSystem.ultraSonic());
-		SmartDashboard.putString("PIXY", Robot.pixyGuidance);
-		SmartDashboard.putNumber("LIDAR", Robot.rearDistance);
-		SmartDashboard.putNumber("HEADING", Robot.heading);
-		
-		SmartDashboard.putNumber("PDP 12:", pdp.getCurrent(12));
-		SmartDashboard.putNumber("PDP 13:", pdp.getCurrent(13));
-		SmartDashboard.putNumber("PDP 14:", pdp.getCurrent(14));
-		SmartDashboard.putNumber("PDP 15", pdp.getCurrent(15));
+//        SmartDashboard.putBoolean("Gear", DriveSystem.hasGear());
+//        SmartDashboard.putBoolean("Climber On?", ClimbSystem.isOn());
+//        SmartDashboard.putNumber("Front Distance", DriveSystem.ultraSonic());
+//		SmartDashboard.putString("PIXY", Robot.pixyGuidance);
+//		SmartDashboard.putNumber("LIDAR", Robot.rearDistance);
+//		SmartDashboard.putNumber("HEADING", Robot.heading);
+//		
+//		SmartDashboard.putNumber("PDP 12:", pdp.getCurrent(12));
+//		SmartDashboard.putNumber("PDP 13:", pdp.getCurrent(13));
+//		SmartDashboard.putNumber("PDP 14:", pdp.getCurrent(14));
+//		SmartDashboard.putNumber("PDP 15", pdp.getCurrent(15));
     }
     
 	/**
@@ -115,7 +116,7 @@ public class Robot extends IterativeRobot {
 	
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-		Arduino.update();
+		//Arduino.update();
 		updateSmartDashboard();
 	}
 	/**
@@ -140,7 +141,7 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-		Arduino.update();
+		//Arduino.update();
 		updateSmartDashboard();
 	}
 
@@ -159,7 +160,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-		Arduino.update();
+		//Arduino.update();
 		updateSmartDashboard();	
     }
     
@@ -168,7 +169,7 @@ public class Robot extends IterativeRobot {
      */
     public void testPeriodic() {
         LiveWindow.run();
-		Arduino.update();
+		//Arduino.update();
 		updateSmartDashboard();
     }
 }
