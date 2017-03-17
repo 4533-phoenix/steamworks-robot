@@ -34,5 +34,4 @@
 
 
 * Test Autonomous.
- *Make sure the wheels are turning the correct direction.
- 
+ * Make sure the wheels are turning the correct direction.
