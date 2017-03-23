@@ -9,6 +9,7 @@
 #include <Timer.h>
 
 #define X_CENTER ((PIXY_MAX_X-PIXY_MIN_X)/2)
+int ultrasonicpin = 0;
 //Pixy pixy;
 LIDARLite lidar;
 uint16_t blocks;
@@ -18,6 +19,14 @@ String gyroPrint;
 Adafruit_9DOF                dof   = Adafruit_9DOF();
 Adafruit_LSM303_Mag_Unified   mag   = Adafruit_LSM303_Mag_Unified(30302);
 int i;
+
+double readUltraSonic() {
+  double total = 0;
+  for(i = 0; i < 50; i++) {
+    total += analogRead(ultrasonicpin);
+  }
+  return ((total / 50.0) / 2.0) * 2.54;
+}
 
 void printData() {
   sensors_vec_t orientation;
@@ -58,7 +67,12 @@ void printData() {
 //    }
 //
 //  }
-
+  dtostrf(readUltraSonic(), 5, 2 , buf);
+  sprintf(buffer, "^%s~%s~%s~", "ULTRASONIC", "cm", buf);
+  Serial.write(buffer);
+  if (debug) {
+    Serial.println("");
+  }
 
   //LIDAR STUFF
   sprintf(buffer, "^%s~%s~%d~", "LIDAR", "cm", lidar.distance());
@@ -103,8 +117,3 @@ void loop() {
   t.update();
 
 }
-
-
-
-
-
