@@ -16,19 +16,23 @@ public class RobotMap {
 	// number and the module. For example you with a rangefinder:
 	// public static int rangefinderPort = 1;
 	// public static int rangefinderModule = 1;
-
+	public static boolean useRampedDriving = false;
+	public static boolean useTurboTrigger = true;
 	public static int RIGHT_TRIGGER = 8;
 	public static int RIGHT_BUMPER = 6;
 	public static int LEFT_TRIGGER = 7;
 	public static int LEFT_BUMPER = 5;
 	public static int Y_BUTTON = 4;
-	public static int X_BUTTON = 1;
 	public static int B_BUTTON = 3;
 	public static int A_BUTTON = 2;
 	public static int RIGHT_STICK_BUTTON = 12;
 	public static int LEFT_STICK_BUTTON = 11;
 	public static int BACK_BUTTON = 9;
 	public static int START_BUTTON = 10;
+	public static int TRIANGLE_BUTTON = 1;
+	public static int CIRCLE_BUTTON = 2;
+	public static int X_BUTTON = 3;
+	public static int SQUARE_BUTTON = 4;
 	
 	// can
 	public static int Motor_Left_Master = 1;
@@ -53,7 +57,7 @@ public class RobotMap {
 	public static int GEAR_SENSOR = 9;
 	
 	//AIO
-	public static int FRONTDISTANCE = 2; //Ultrasonic Sensor
+	public static int FRONT_SENSOR_PORT = 3; //Ultrasonic Sensor
 	
 	//Relay
 	//public static int AGITATOR_MOTOR = 0;

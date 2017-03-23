@@ -87,6 +87,13 @@ public class Arduino {
 					case "PIXY":
 						Robot.pixyGuidance = data[2];
 						break;
+					case "ULTRASONIC":
+						try {
+							double frontDistance = Double.parseDouble(data[2]);
+							Robot.frontDistance = frontDistance;
+						} catch (NumberFormatException e) {
+							continue;
+						}
 					}
 				} else {
 					// This isn't a complete data packet, so place it in the old

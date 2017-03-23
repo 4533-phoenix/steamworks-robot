@@ -4,7 +4,6 @@ package org.usfirst.frc.team4533.robot.subsystems;
 import org.usfirst.frc.team4533.robot.Robot;
 import org.usfirst.frc.team4533.robot.RobotMap;
 import org.usfirst.frc.team4533.robot.commands.DriveWithJoystick;
-import org.usfirst.frc.team4533.robot.commands.SpeedChange;
 import org.usfirst.frc.team4533.robot.utils.SensorData;
 import org.usfirst.frc.team4533.robot.utils.SensorUtilities;
 
@@ -31,7 +30,7 @@ public class DriveSystem extends Subsystem {
 	CANTalon leftSlave;
 	CANTalon rightSlave;
 	static DigitalInput di;
-	static AnalogInput ultraSonic;
+	static AnalogInput usSensor;
 	static SensorData data;
 	static String name;
 	static String value;
@@ -64,9 +63,14 @@ public class DriveSystem extends Subsystem {
 		leftSlave.changeControlMode(TalonControlMode.Follower);
 		// sets the master motor to the left master
 		leftSlave.set(RobotMap.Motor_Left_Master);
-		ultraSonic = new AnalogInput(RobotMap.FRONTDISTANCE);
+		usSensor = new AnalogInput(RobotMap.FRONT_SENSOR_PORT);
 		di = new DigitalInput(RobotMap.GEAR_SENSOR);
 		stick = new Joystick(RobotMap.JOYSTICK_PORT);
+		
+		if(RobotMap.useRampedDriving){
+			leftMaster.setVoltageRampRate(12);
+			rightMaster.setVoltageRampRate(12);
+		}
 	}
 
 	public static void initialize() {
@@ -87,33 +91,32 @@ public class DriveSystem extends Subsystem {
 	}
 
 	public void DriveWithJoystick(Joystick driver) {
-		int ro = 0;
-		if (RobotMap.isPractice()) {
-			ro = -1;
-		} else {
-			ro = -1;
-		}
 		
 		double left = driver.getRawAxis(3);
 		double right = driver.getY();
 		
-//		this.drive(getControlSpeed(driver.getY()) * ro, getControlSpeed(driver.getRawAxis(3)) * ro);
-		if(stick.getRawButton(RobotMap.LEFT_BUMPER)){
-			this.drive(left * 0.5, right * 0.5);
+		if(RobotMap.useTurboTrigger){
+			if(stick.getRawButton(RobotMap.LEFT_BUMPER)){
+				this.drive(left * -1, right * -1);
+			}else{
+				this.drive(left * -0.5, right * -0.5);
+			}
 		}else{
-			this.drive(left, right);
-		}	
+			if(stick.getRawButton(RobotMap.LEFT_BUMPER)){
+				this.drive(left * -0.5, right * -0.5);
+			}else{
+				this.drive(left * -1, right * -1);
+			}
+		}
+		
+	
 		
 	}
 
 	public static double getControlSpeed(double x) {
 		double control = 0.0;
 		control = Math.copySign(1.0, x) * (Math.pow(Math.abs(x), Robot.seed));
-		//if (x > 0) {
-			//control = (1 - Math.pow(Robot.seed, x)) / (1 - Robot.seed);
-		//} else {
-		//	control = -((1 - Math.pow(Robot.seed, -x)) / (1 - Robot.seed));
-		//}
+		
 		double scalingFactor = Robot.maxSpeed/100.0;
 		return (control*scalingFactor);
 	}
@@ -153,46 +156,8 @@ public class DriveSystem extends Subsystem {
 		this.turnRight(-.5, .5);
 	}
 
-	public static double ultraSonic() {
-		return (ultraSonic.getValue() / 8);
-
-	}
-
 	public static boolean hasGear() {
-		if (di.get()) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-
-	public static int lidarValue() {
-		data = SensorUtilities.interpretSerial();
-		if (data != null) {
-			name = data.getName();
-			if (name == "LIDAR") {
-				return Integer.parseInt(value);
-			} else {
-				return (int) SmartDashboard.getNumber("LIDAR", 0.0);
-			}
-		} else {
-			return -1;
-		}
-	}
-
-	public static String pixyValue() {
-		data = SensorUtilities.interpretSerial();
-		if (data == null) {
-			return "";
-		} else {
-			name = data.getName();
-			if (name == "PIXY") {
-				return value;
-			} else {
-				return SmartDashboard.getString("PIXY", "straight");
-			}
-		}
+		return !(di.get());
 	}
 
 	public void initDefaultCommand() {

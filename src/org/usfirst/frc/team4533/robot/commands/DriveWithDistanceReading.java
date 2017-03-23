@@ -7,13 +7,13 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class DriveWithDistanceReading extends Command {
 	private final double speed;
-	private double frontDistance;
-	private double rearDistance;
+	private double distance;
+	private int direction;
 	
-	public DriveWithDistanceReading(double speed, double frontDistance, double rearDistance) {
+	public DriveWithDistanceReading(double speed, double distance, int direction) {
 		this.speed = speed;
-		this.frontDistance = frontDistance;
-		this.rearDistance = rearDistance;
+		this.distance = distance;
+		this.direction = direction;
 		requires(Robot.drive);
 	}
 
@@ -37,10 +37,12 @@ public class DriveWithDistanceReading extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		if (DriveSystem.ultraSonic() < frontDistance || Robot.rearDistance > rearDistance) {
-			return true;
-
+		if(direction == Robot.FRONT){
+			return (Robot.frontDistance < distance);
+		}else if(direction == Robot.REAR){
+			return (Robot.rearDistance > distance);
 		}
+
 		return false;
 	}
 }

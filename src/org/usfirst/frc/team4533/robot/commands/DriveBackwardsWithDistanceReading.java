@@ -37,7 +37,7 @@ public class DriveBackwardsWithDistanceReading extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		if (DriveSystem.ultraSonic() > frontDistance || Robot.rearDistance < rearDistance) {
+		if (Robot.frontDistance > frontDistance || Robot.rearDistance < rearDistance) {
 			return true;
 
 		}
