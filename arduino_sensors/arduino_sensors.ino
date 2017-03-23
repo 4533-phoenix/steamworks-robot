@@ -1,4 +1,4 @@
-f#include <Adafruit_Sensor.h>
+#include <Adafruit_Sensor.h>
 #include <Adafruit_LSM303_U.h>
 #include <Adafruit_9DOF.h>
 #include <Adafruit_L3GD20_U.h>
@@ -39,7 +39,6 @@ void printData() {
   int dif;
   blocks = -1;
   char buffer[100];
-  blocks = pixy.getBlocks();
   // PIXY STUFF
   String dir;
   static int i = 0;
@@ -95,7 +94,6 @@ void printData() {
 
 void setup() {
   Serial.begin(115200);
-  pixy.init();
   if (debug) {
     Serial.println("PIXY ONLINE");
   }
@@ -108,7 +106,7 @@ void setup() {
   {
     Serial.println("GYRO ONLINE");
   }
-  t.every(15, printData);
+  t.every(15, printData, (void*)0);
 
 }
 
