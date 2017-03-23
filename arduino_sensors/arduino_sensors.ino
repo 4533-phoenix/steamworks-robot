@@ -9,7 +9,8 @@ f#include <Adafruit_Sensor.h>
 #include <Timer.h>
 
 #define X_CENTER ((PIXY_MAX_X-PIXY_MIN_X)/2)
-Pixy pixy;
+int ultrasonicpin = 0;
+//Pixy pixy;
 LIDARLite lidar;
 uint16_t blocks;
 boolean debug = false;
@@ -22,6 +23,14 @@ int compassCount = 0;
 double compassTotal = 0;
 
 
+double readUltraSonic() {
+  double total = 0;
+  for(i = 0; i < 50; i++) {
+    total += analogRead(ultrasonicpin);
+  }
+  return ((total / 50.0) / 2.0) * 2.54;
+}
+
 void printData() {
 
   int dif;
@@ -33,34 +42,39 @@ void printData() {
   static int i = 0;
   int CenterOfBlocks;
   char buf[7];
-
-  if (blocks) {
-    //Serial.println("Block Count: " + String(blocks));
-    if (blocks == 1) {
-      CenterOfBlocks = pixy.blocks[0].x;
-    } else if (blocks == 2) {
-      CenterOfBlocks = (pixy.blocks[0].x + pixy.blocks[1].x) / 2;
-    } else {
-      CenterOfBlocks = 0;
-    }
-    //if (blocks == 1 || blocks == 2) {
-    dif = X_CENTER - CenterOfBlocks;
-    if (dif < -5) {
-      sprintf(buffer, "^%s~%s~%s~", "PIXY", "direction", "right");
-      Serial.write(buffer);
-    } else if (dif > 5) {
-      sprintf(buffer, "^%s~%s~%s~", "PIXY", "direction", "left");
-      Serial.write(buffer);
-    } else {
-      sprintf(buffer, "^%s~%s~%s~", "PIXY", "direction", "straight");
-      Serial.write(buffer);
-    }
-    if (debug) {
-      Serial.println("");
-    }
-
+//
+//  if (blocks) {
+//    //Serial.println("Block Count: " + String(blocks));
+//    if (blocks == 1) {
+//      CenterOfBlocks = pixy.blocks[0].x;
+//    } else if (blocks == 2) {
+//      CenterOfBlocks = (pixy.blocks[0].x + pixy.blocks[1].x) / 2;
+//    } else {
+//      CenterOfBlocks = 0;
+//    }
+//    //if (blocks == 1 || blocks == 2) {
+//    dif = X_CENTER - CenterOfBlocks;
+//    if (dif < -5) {
+//      sprintf(buffer, "^%s~%s~%s~", "PIXY", "direction", "right");
+//      Serial.write(buffer);
+//    } else if (dif > 5) {
+//      sprintf(buffer, "^%s~%s~%s~", "PIXY", "direction", "left");
+//      Serial.write(buffer);
+//    } else {
+//      sprintf(buffer, "^%s~%s~%s~", "PIXY", "direction", "straight");
+//      Serial.write(buffer);
+//    }
+//    if (debug) {
+//      Serial.println("");
+//    }
+//
+//  }
+  dtostrf(readUltraSonic(), 5, 2 , buf);
+  sprintf(buffer, "^%s~%s~%s~", "ULTRASONIC", "cm", buf);
+  Serial.write(buffer);
+  if (debug) {
+    Serial.println("");
   }
-
 
   //LIDAR STUFF
   sprintf(buffer, "^%s~%s~%d~", "LIDAR", "cm", lidar.distance());
@@ -107,8 +121,3 @@ void loop() {
   t.update();
 
 }
-
-
-
-
-
