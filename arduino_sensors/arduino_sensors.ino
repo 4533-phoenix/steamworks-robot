@@ -28,6 +28,9 @@ double readUltraSonic() {
   for(i = 0; i < 50; i++) {
     total += analogRead(ultrasonicpin);
   }
+  // UltraSonic analog values are (Vcc/512) per inch and analogRead
+  // is 0-1023 @ 5V, so divide by 2 for per-inch reading. Multiply by
+  // 2.54 to convert inches to centimeters.
   return ((total / 50.0) / 2.0) * 2.54;
 }
 
