@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class MiddleDriveStationAutonomous extends CommandGroup{
 
     public MiddleDriveStationAutonomous() {
-        addSequential(new DriveWithDistanceReading(.25, 10, Robot.FRONT));
+        addSequential(new DriveWithDistanceReading(.25, 20, Robot.FRONT));
     }
 
 }

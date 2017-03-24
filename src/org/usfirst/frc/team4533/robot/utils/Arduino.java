@@ -94,7 +94,9 @@ public class Arduino {
 						} catch (NumberFormatException e) {
 							continue;
 						}
+						break;
 					}
+					
 				} else {
 					// This isn't a complete data packet, so place it in the old
 					// buffer so we
