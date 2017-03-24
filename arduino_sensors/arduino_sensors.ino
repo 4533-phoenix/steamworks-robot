@@ -25,13 +25,13 @@ double compassTotal = 0;
 
 double readUltraSonic() {
   double total = 0;
-  for(i = 0; i < 50; i++) {
-    total += analogRead(ultrasonicpin);
+  for(int c = 0; c < 20; c++) {
+    total += analogRead(ultrasonicpin) / 2.0;
   }
   // UltraSonic analog values are (Vcc/512) per inch and analogRead
   // is 0-1023 @ 5V, so divide by 2 for per-inch reading. Multiply by
   // 2.54 to convert inches to centimeters.
-  return ((total / 50.0) / 2.0) * 2.54;
+  return (total / 20.0) * 2.54;
 }
 
 void printData() {
@@ -90,6 +90,9 @@ void printData() {
   compassTotal = 0;
   sprintf(buffer, "^%s~%s~%s~", "GYRO", "heading", buf);
   Serial.write(buffer);
+  if (debug) {
+    Serial.println("");
+  }
 }
 
 void setup() {
@@ -117,6 +120,7 @@ void loop() {
   if (dof.magGetOrientation(SENSOR_AXIS_Z, &mag_event, &orientation))
   {
     compassTotal += orientation.heading;
+    compassCount++;
   }
   
   t.update();
